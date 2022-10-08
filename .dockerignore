@@ -1,0 +1,7 @@
+**
+!kilroyweb/
+kilroyweb/.next/
+kilroyweb/docs/
+kilroyweb/node_modules/
+kilroyweb/README.md
+kilroyweb/tsconfig.tsbuildinfo
