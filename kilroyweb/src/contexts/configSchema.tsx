@@ -5,7 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import cilroy from "../lib/cilroy";
+import { client, request } from "../lib/cilroy";
 
 type ConfigSchemaContextType = {
   controller?: Object;
@@ -25,37 +25,40 @@ export function ConfigSchemaProvider({ children }: ConfigSchemaProviderProps) {
   const [module, setModule] = useState<Object>();
 
   useEffect(() => {
-    const abort = new AbortController();
-    cilroy
-      .getControllerConfigSchema({}, { signal: abort.signal })
-      .then((response) => {
-        const schema = JSON.parse(response.schema);
-        setController(schema);
-      });
-    return () => abort.abort();
-  }, [cilroy]);
+    const method = client.getControllerConfigSchema;
+    const { result, abort } = request({ method });
+
+    result.then((response) => {
+      const schema = JSON.parse(response.schema);
+      setController(schema);
+    });
+
+    return abort;
+  }, [client]);
 
   useEffect(() => {
-    const abort = new AbortController();
-    cilroy
-      .getFaceConfigSchema({}, { signal: abort.signal })
-      .then((response) => {
-        const schema = JSON.parse(response.schema);
-        setFace(schema);
-      });
-    return () => abort.abort();
-  }, [cilroy]);
+    const method = client.getFaceConfigSchema;
+    const { result, abort } = request({ method });
+
+    result.then((response) => {
+      const schema = JSON.parse(response.schema);
+      setFace(schema);
+    });
+
+    return abort;
+  }, [client]);
 
   useEffect(() => {
-    const abort = new AbortController();
-    cilroy
-      .getModuleConfigSchema({}, { signal: abort.signal })
-      .then((response) => {
-        const schema = JSON.parse(response.schema);
-        setModule(schema);
-      });
-    return () => abort.abort();
-  }, [cilroy]);
+    const method = client.getModuleConfigSchema;
+    const { result, abort } = request({ method });
+
+    result.then((response) => {
+      const schema = JSON.parse(response.schema);
+      setModule(schema);
+    });
+
+    return abort;
+  }, [client]);
 
   const configSchema = {
     controller: controller,

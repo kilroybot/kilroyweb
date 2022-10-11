@@ -1,45 +1,23 @@
-import { useEffect, useState } from "react";
-import {
-  GetFaceMetadataResponse,
-  GetModuleMetadataResponse,
-} from "../lib/protobuf";
-import cilroy from "../lib/cilroy";
 import { Loader, Text, Title } from "@mantine/core";
 import { useLabels } from "../contexts/labels";
 import Center from "./Center";
-
-type Metadata = {
-  key: string;
-  description: string;
-};
+import { useMetadata } from "../contexts/metadata";
+import { useStatus } from "../contexts/status";
+import { Status } from "../lib/protobuf";
 
 export type MetadataSummaryProps = {};
 
 export default function MetadataSummary(props: MetadataSummaryProps) {
-  const [faceMetadata, setFaceMetadata] = useState<Metadata>();
-  const [moduleMetadata, setModuleMetadata] = useState<Metadata>();
-
+  const { face: faceMetadata, module: moduleMetadata } = useMetadata();
+  const { face: faceStatus, module: moduleStatus } = useStatus();
   const labels = useLabels();
 
-  useEffect(() => {
-    cilroy.getFaceMetadata({}).then((response: GetFaceMetadataResponse) => {
-      setFaceMetadata({
-        key: response.key,
-        description: response.description,
-      });
-    });
-  }, [cilroy]);
-
-  useEffect(() => {
-    cilroy.getModuleMetadata({}).then((response: GetModuleMetadataResponse) => {
-      setModuleMetadata({
-        key: response.key,
-        description: response.description,
-      });
-    });
-  }, [cilroy]);
-
-  if (faceMetadata === undefined || moduleMetadata === undefined)
+  if (
+    faceMetadata === undefined ||
+    moduleMetadata === undefined ||
+    faceStatus === Status.UNSPECIFIED ||
+    moduleStatus === Status.UNSPECIFIED
+  )
     return (
       <Center>
         <Loader />

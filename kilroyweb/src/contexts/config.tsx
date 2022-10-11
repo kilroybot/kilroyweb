@@ -5,9 +5,13 @@ import {
   useEffect,
   useState,
 } from "react";
-import cilroy from "../lib/cilroy";
+import { client, request } from "../lib/cilroy";
 import { useStreams } from "./streams";
-import { WatchControllerConfigResponse } from "../lib/protobuf";
+import {
+  WatchControllerConfigResponse,
+  WatchFaceConfigResponse,
+  WatchModuleConfigResponse,
+} from "../lib/protobuf";
 
 type ConfigContextType = {
   controller?: Object;
@@ -22,33 +26,49 @@ export type ConfigProviderProps = {
 };
 
 export function ConfigProvider({ children }: ConfigProviderProps) {
-  const [controllerFirstFetched, setControllerFirstFetched] = useState(false);
   const [controllerConfig, setControllerConfig] = useState<Object>();
-  const [faceFirstFetched, setFaceFirstFetched] = useState(false);
   const [faceConfig, setFaceConfig] = useState<Object>();
-  const [moduleFirstFetched, setModuleFirstFetched] = useState(false);
   const [moduleConfig, setModuleConfig] = useState<Object>();
+
+  const { messages, getConnectQueue } = useStreams();
 
   const {
     WatchControllerConfig: controllerStream,
     WatchFaceConfig: faceStream,
     WatchModuleConfig: moduleStream,
-  } = useStreams();
+  } = messages;
 
   useEffect(() => {
-    const abort = new AbortController();
-    cilroy
-      .getControllerConfig({}, { signal: abort.signal })
-      .then((response) => {
+    const method = client.getControllerConfig;
+    const { result, abort } = request({ method });
+    result.then((response) => setControllerConfig(JSON.parse(response.config)));
+    return abort;
+  }, [client]);
+
+  useEffect(() => {
+    let abortCallback: () => void = () => {};
+
+    const fetch = async () => {
+      for await (const _ of getConnectQueue()) {
+        const { result, abort } = request({
+          method: client.getControllerConfig,
+          retryOptions: {
+            retriesLeft: 3,
+          },
+        });
+        abortCallback = abort;
+        const response = await result;
         const config = JSON.parse(response.config);
         setControllerConfig(config);
-        setControllerFirstFetched(true);
-      });
-    return () => abort.abort();
-  }, [cilroy]);
+      }
+    };
+    fetch().then();
+
+    return abortCallback;
+  }, [client, getConnectQueue]);
 
   useEffect(() => {
-    if (controllerStream === undefined || !controllerFirstFetched) return;
+    if (controllerStream === undefined) return;
 
     const fetch = async () => {
       for await (const message of controllerStream) {
@@ -58,53 +78,91 @@ export function ConfigProvider({ children }: ConfigProviderProps) {
       }
     };
     fetch().then();
-  }, [controllerStream === undefined, controllerFirstFetched]);
+  }, [controllerStream === undefined]);
 
   useEffect(() => {
-    const abort = new AbortController();
-    cilroy.getFaceConfig({}, { signal: abort.signal }).then((response) => {
-      const config = JSON.parse(response.config);
-      setFaceConfig(config);
-      setFaceFirstFetched(true);
-    });
-    return () => abort.abort();
-  }, [cilroy]);
+    const method = client.getFaceConfig;
+    const { result, abort } = request({ method });
+    result.then((response) => setFaceConfig(JSON.parse(response.config)));
+    return abort;
+  }, [client]);
 
   useEffect(() => {
-    if (faceStream === undefined || !faceFirstFetched) return;
+    let abortCallback: () => void = () => {};
 
     const fetch = async () => {
-      for await (const message of faceStream) {
-        const response = WatchControllerConfigResponse.fromJsonString(message);
+      for await (const _ of getConnectQueue()) {
+        const { result, abort } = request({
+          method: client.getFaceConfig,
+          retryOptions: {
+            retriesLeft: 3,
+          },
+        });
+        abortCallback = abort;
+        const response = await result;
         const config = JSON.parse(response.config);
         setFaceConfig(config);
       }
     };
     fetch().then();
-  }, [faceStream === undefined, faceFirstFetched]);
+
+    return abortCallback;
+  }, [client, getConnectQueue]);
 
   useEffect(() => {
-    const abort = new AbortController();
-    cilroy.getModuleConfig({}, { signal: abort.signal }).then((response) => {
-      const config = JSON.parse(response.config);
-      setModuleConfig(config);
-      setModuleFirstFetched(true);
-    });
-    return () => abort.abort();
-  }, [cilroy]);
-
-  useEffect(() => {
-    if (moduleStream === undefined || !moduleFirstFetched) return;
+    if (faceStream === undefined) return;
 
     const fetch = async () => {
-      for await (const message of moduleStream) {
-        const response = WatchControllerConfigResponse.fromJsonString(message);
+      for await (const message of faceStream) {
+        const response = WatchFaceConfigResponse.fromJsonString(message);
+        const config = JSON.parse(response.config);
+        setFaceConfig(config);
+      }
+    };
+    fetch().then();
+  }, [faceStream === undefined]);
+
+  useEffect(() => {
+    const method = client.getModuleConfig;
+    const { result, abort } = request({ method });
+    result.then((response) => setModuleConfig(JSON.parse(response.config)));
+    return abort;
+  }, [client]);
+
+  useEffect(() => {
+    let abortCallback: () => void = () => {};
+
+    const fetch = async () => {
+      for await (const _ of getConnectQueue()) {
+        const { result, abort } = request({
+          method: client.getModuleConfig,
+          retryOptions: {
+            retriesLeft: 3,
+          },
+        });
+        abortCallback = abort;
+        const response = await result;
         const config = JSON.parse(response.config);
         setModuleConfig(config);
       }
     };
     fetch().then();
-  }, [moduleStream === undefined, moduleFirstFetched]);
+
+    return abortCallback;
+  }, [client, getConnectQueue]);
+
+  useEffect(() => {
+    if (moduleStream === undefined) return;
+
+    const fetch = async () => {
+      for await (const message of moduleStream) {
+        const response = WatchModuleConfigResponse.fromJsonString(message);
+        const config = JSON.parse(response.config);
+        setModuleConfig(config);
+      }
+    };
+    fetch().then();
+  }, [moduleStream === undefined]);
 
   const config = {
     controller: controllerConfig,

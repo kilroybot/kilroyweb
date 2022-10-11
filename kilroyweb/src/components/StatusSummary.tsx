@@ -50,18 +50,21 @@ export const StatusSummary = (props: StatusSummaryProps) => {
           on={status.controller === Status.READY}
           onColor={onColor}
           offColor={offColor}
+          offGlow={true}
         />
         <StatusIndicator
           status="Face"
           on={status.face === Status.READY}
           onColor={onColor}
           offColor={offColor}
+          offGlow={true}
         />
         <StatusIndicator
           status="Module"
           on={status.module === Status.READY}
           onColor={onColor}
           offColor={offColor}
+          offGlow={true}
         />
       </Stack>
     </>

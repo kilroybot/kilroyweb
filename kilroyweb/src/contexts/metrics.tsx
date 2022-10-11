@@ -5,7 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import cilroy from "../lib/cilroy";
+import { client, request } from "../lib/cilroy";
 import {
   MetricConfig,
   MetricData,
@@ -26,32 +26,48 @@ export type RawMetricsProviderProps = {
 
 export function RawMetricsProvider({ children }: RawMetricsProviderProps) {
   const [configs, setConfigs] = useState<MetricConfig[]>();
-  const [firstDataFetched, setFirstDataFetched] = useState(false);
   const [data, setData] = useState<MetricData[]>();
 
-  const { WatchModuleMetrics: stream } = useStreams();
+  const { messages, getConnectQueue } = useStreams();
+  const { WatchModuleMetrics: stream } = messages;
 
   useEffect(() => {
-    const abort = new AbortController();
+    const method = client.getModuleMetricsConfig;
+    const { result, abort } = request({ method });
+    result.then((response) => setConfigs(response.configs));
+    return abort;
+  }, [client]);
+
+  useEffect(() => {
+    const method = client.getModuleMetrics;
+    const { result, abort } = request({ method });
+    result.then((response) => setData(response.metrics));
+    return abort;
+  }, [client]);
+
+  useEffect(() => {
+    let abortCallback: () => void = () => {};
+
     const fetch = async () => {
-      const configResponse = await cilroy.getModuleMetricsConfig(
-        {},
-        { signal: abort.signal }
-      );
-      setConfigs(configResponse.configs);
-      const metricsResponse = await cilroy.getModuleMetrics(
-        {},
-        { signal: abort.signal }
-      );
-      setData(metricsResponse.metrics);
-      setFirstDataFetched(true);
+      for await (const _ of getConnectQueue()) {
+        const { result, abort } = request({
+          method: client.getModuleMetrics,
+          retryOptions: {
+            retriesLeft: 3,
+          },
+        });
+        abortCallback = abort;
+        const response = await result;
+        setData(response.metrics);
+      }
     };
     fetch().then();
-    return () => abort.abort();
-  }, [cilroy]);
+
+    return abortCallback;
+  }, [client, getConnectQueue]);
 
   useEffect(() => {
-    if (stream === undefined || !firstDataFetched) return;
+    if (stream === undefined) return;
 
     const fetch = async () => {
       for await (const message of stream) {
@@ -62,7 +78,7 @@ export function RawMetricsProvider({ children }: RawMetricsProviderProps) {
       }
     };
     fetch().then();
-  }, [stream === undefined, firstDataFetched]);
+  }, [stream === undefined]);
 
   const metrics = {
     configs: configs,

@@ -10,20 +10,30 @@ import Segment from "../components/Segment";
 import { useConfigSchema } from "../contexts/configSchema";
 import SchemaBasedForm from "../components/SchemaBasedForm";
 import { objectDiff } from "../lib/utils";
-import cilroy from "../lib/cilroy";
+import { client, request } from "../lib/cilroy";
+import { useStatus } from "../contexts/status";
+import { Status } from "../lib/protobuf";
 
 export default function Module() {
   const labels = useLabels();
   const { module: config } = useConfig();
   const { module: schema } = useConfigSchema();
+  const { module: moduleStatus, controller: controllerStatus } = useStatus();
 
   const handleSubmit = useCallback(
     async (data) => {
       const diff = objectDiff(data, config);
-      if (diff !== null)
-        await cilroy.setModuleConfig({ config: JSON.stringify(diff) });
+      if (diff !== null) {
+        const { result, abort } = request({
+          method: client.setModuleConfig,
+          params: { config: JSON.stringify(diff) },
+          retryOptions: { retriesLeft: 3 },
+        });
+        await result;
+        return abort;
+      }
     },
-    [cilroy, config]
+    [client, config]
   );
 
   return (
@@ -33,7 +43,10 @@ export default function Module() {
       </Head>
       <PageLayout page="module">
         <Segment>
-          {config && schema ? (
+          {config &&
+          schema &&
+          moduleStatus !== Status.UNSPECIFIED &&
+          controllerStatus !== Status.UNSPECIFIED ? (
             <>
               <Title order={4}>{labels.module.config}</Title>
               <SchemaBasedForm

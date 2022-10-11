@@ -25,6 +25,7 @@ import { RawMetricsProvider } from "../contexts/metrics";
 import { ConfigProvider } from "../contexts/config";
 import { StreamsProvider } from "../contexts/streams";
 import { ConfigSchemaProvider } from "../contexts/configSchema";
+import { MetadataProvider } from "../contexts/metadata";
 
 type MantineAppProps = {
   colorScheme: ColorScheme;
@@ -72,18 +73,20 @@ export default function App(props: ExtendedAppProps) {
             <LabelsProvider>
               <ToastsProvider>
                 <StreamsProvider>
-                  <StatusProvider>
-                    <TrainingStatusProvider>
-                      <RawMetricsProvider>
-                        <ConfigSchemaProvider>
-                          <ConfigProvider>
-                            <RouterTransition />
-                            <props.Component {...props.pageProps} />
-                          </ConfigProvider>
-                        </ConfigSchemaProvider>
-                      </RawMetricsProvider>
-                    </TrainingStatusProvider>
-                  </StatusProvider>
+                  <MetadataProvider>
+                    <StatusProvider>
+                      <TrainingStatusProvider>
+                        <RawMetricsProvider>
+                          <ConfigSchemaProvider>
+                            <ConfigProvider>
+                              <RouterTransition />
+                              <props.Component {...props.pageProps} />
+                            </ConfigProvider>
+                          </ConfigSchemaProvider>
+                        </RawMetricsProvider>
+                      </TrainingStatusProvider>
+                    </StatusProvider>
+                  </MetadataProvider>
                 </StreamsProvider>
               </ToastsProvider>
             </LabelsProvider>
