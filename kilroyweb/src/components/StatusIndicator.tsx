@@ -5,14 +5,19 @@ export type StatusIndicatorProps = {
   on: boolean;
   onColor?: string;
   offColor?: string;
+  onGlow?: boolean;
+  offGlow?: boolean;
 };
 
 const useStyles = createStyles((theme) => ({
   box: {
-    width: "12px",
-    height: "12px",
+    width: "0.75em",
+    height: "0.75em",
     borderRadius: "100%",
     position: "relative",
+  },
+  glow: {
+    boxShadow: "0 0 0.375em 0.075em",
   },
 }));
 
@@ -21,8 +26,10 @@ export default function StatusIndicator({
   on,
   onColor,
   offColor,
+  onGlow = true,
+  offGlow = false,
 }: StatusIndicatorProps) {
-  const { classes } = useStyles();
+  const { classes, cx } = useStyles();
   const theme = useMantineTheme();
 
   const finalOnColor =
@@ -34,15 +41,23 @@ export default function StatusIndicator({
     ];
 
   const finalOffColor =
-    offColor ?? theme.colorScheme === "dark"
+    offColor ??
+    (theme.colorScheme === "dark"
       ? theme.colors.gray[8]
-      : theme.colors.gray[2];
+      : theme.colors.gray[2]);
 
   return (
     <Group>
       <Box
-        className={classes.box}
-        style={{ backgroundColor: on ? finalOnColor : finalOffColor }}
+        className={cx(
+          classes.box,
+          on && onGlow && classes.glow,
+          !on && offGlow && classes.glow
+        )}
+        style={{
+          backgroundColor: on ? finalOnColor : finalOffColor,
+          color: on ? finalOnColor : finalOffColor,
+        }}
       />
       <Text>{status}</Text>
     </Group>

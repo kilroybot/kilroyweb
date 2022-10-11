@@ -72,3 +72,110 @@ export function enumToArray(enumObj) {
     .filter((value) => isNaN(Number(value)) === false)
     .map((key) => enumObj[key]);
 }
+
+export type RetryOptions<T = any> = {
+  fn: () => Promise<T>;
+  retriesLeft?: number;
+  delay?: number;
+  backoff?: number;
+  maxDelay?: number;
+  onError?: (error: any) => void;
+  onRetry?: (error: any) => void;
+  ignoreError?: (error: any) => boolean;
+};
+
+export function retry<T = any>({
+  fn,
+  retriesLeft,
+  delay = 100,
+  backoff = 2,
+  maxDelay = 10000,
+  onRetry,
+  onError,
+  ignoreError,
+}: RetryOptions<T>): Promise<T> {
+  return fn().catch((err) => {
+    onError?.(err);
+
+    if (ignoreError?.(err)) return Promise.reject(err);
+
+    if (retriesLeft === 0) return Promise.reject(err);
+
+    onRetry?.(err);
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(
+          retry({
+            fn,
+            retriesLeft: retriesLeft ? retriesLeft - 1 : retriesLeft,
+            delay: maxDelay
+              ? Math.min(delay * backoff, maxDelay)
+              : delay * backoff,
+            backoff,
+            maxDelay,
+            onRetry,
+            ignoreError,
+          })
+        );
+      }, delay);
+    });
+  });
+}
+
+export type ReconnectOptions<T = any> = {
+  fn: () => AsyncIterable<T>;
+  retriesLeft?: number;
+  delay?: number;
+  backoff?: number;
+  maxDelay?: number;
+  onError?: (error: any) => void;
+  onRetry?: (error: any) => void;
+  onConnect?: () => void;
+  ignoreError?: (error: any) => boolean;
+};
+
+export async function* reconnect<T = any>({
+  fn,
+  retriesLeft,
+  delay = 100,
+  backoff = 2,
+  maxDelay = 10000,
+  onRetry,
+  onError,
+  onConnect,
+  ignoreError,
+}: ReconnectOptions<T>): AsyncIterable<T> {
+  const originalRetriesLeft = retriesLeft;
+  const originalDelay = delay;
+
+  while (true) {
+    let disconnected = false;
+
+    try {
+      setTimeout(() => disconnected || onConnect?.(), 1000);
+      for await (const item of fn()) {
+        yield item;
+      }
+      retriesLeft = originalRetriesLeft;
+      delay = originalDelay;
+    } catch (err) {
+      disconnected = true;
+
+      onError?.(err);
+
+      if (ignoreError?.(err)) throw err;
+
+      if (retriesLeft === 0) throw err;
+
+      onRetry?.(err);
+
+      await new Promise<void>((resolve) => {
+        setTimeout(resolve, delay);
+      });
+
+      retriesLeft = retriesLeft ? retriesLeft - 1 : retriesLeft;
+      delay = maxDelay ? Math.min(delay * backoff, maxDelay) : delay * backoff;
+    }
+  }
+}

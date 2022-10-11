@@ -11,7 +11,7 @@ import {
   WatchFaceStatusResponse,
   WatchModuleStatusResponse,
 } from "../lib/protobuf";
-import cilroy from "../lib/cilroy";
+import { client, request } from "../lib/cilroy";
 import { useStreams } from "./streams";
 
 type StatusContextType = {
@@ -27,32 +27,73 @@ export type StatusProviderProps = {
 };
 
 export function StatusProvider({ children }: StatusProviderProps) {
-  const [controllerFirstFetched, setControllerFirstFetched] = useState(false);
   const [controllerStatus, setControllerStatus] = useState<Status>();
-  const [faceFirstFetched, setFaceFirstFetched] = useState(false);
   const [faceStatus, setFaceStatus] = useState<Status>();
-  const [moduleFirstFetched, setModuleFirstFetched] = useState(false);
   const [moduleStatus, setModuleStatus] = useState<Status>();
+
+  const { messages, getErrorQueue, getConnectQueue } = useStreams();
 
   const {
     WatchControllerStatus: controllerStream,
     WatchFaceStatus: faceStream,
     WatchModuleStatus: moduleStream,
-  } = useStreams();
+  } = messages;
 
   useEffect(() => {
-    const abort = new AbortController();
-    cilroy
-      .getControllerStatus({}, { signal: abort.signal })
-      .then((response) => {
+    const method = client.getControllerStatus;
+    const { result, abort } = request({ method });
+    result.then((response) => setControllerStatus(response.status));
+    return abort;
+  }, [client]);
+
+  useEffect(() => {
+    let abortCallback: () => void = () => {};
+
+    const fetch = async () => {
+      for await (const _ of getConnectQueue()) {
+        const { result, abort } = request({
+          method: client.getControllerStatus,
+          retryOptions: {
+            retriesLeft: 3,
+          },
+        });
+        abortCallback = abort;
+        const response = await result;
         setControllerStatus(response.status);
-        setControllerFirstFetched(true);
-      });
-    return () => abort.abort();
-  }, [cilroy]);
+      }
+    };
+    fetch().then();
+
+    return abortCallback;
+  }, [client, getConnectQueue]);
 
   useEffect(() => {
-    if (controllerStream === undefined || !controllerFirstFetched) return;
+    let abortCallback: () => void = () => {};
+
+    const fetch = async () => {
+      for await (const _ of getErrorQueue()) {
+        const { result, abort } = request({
+          method: client.getControllerStatus,
+          retryOptions: {
+            retriesLeft: 3,
+          },
+        });
+        abortCallback = abort;
+        try {
+          const response = await result;
+          setControllerStatus(response.status);
+        } catch (e) {
+          setControllerStatus(Status.UNSPECIFIED);
+        }
+      }
+    };
+    fetch().then();
+
+    return abortCallback;
+  }, [getErrorQueue]);
+
+  useEffect(() => {
+    if (controllerStream === undefined) return;
 
     const fetch = async () => {
       for await (const message of controllerStream) {
@@ -61,19 +102,63 @@ export function StatusProvider({ children }: StatusProviderProps) {
       }
     };
     fetch().then();
-  }, [controllerStream === undefined, controllerFirstFetched]);
+  }, [controllerStream === undefined]);
 
   useEffect(() => {
-    const abort = new AbortController();
-    cilroy.getFaceStatus({}, { signal: abort.signal }).then((response) => {
-      setFaceStatus(response.status);
-      setFaceFirstFetched(true);
-    });
-    return () => abort.abort();
-  }, [cilroy]);
+    const method = client.getFaceStatus;
+    const { result, abort } = request({ method });
+    result.then((response) => setFaceStatus(response.status));
+    return abort;
+  }, [client]);
 
   useEffect(() => {
-    if (faceStream === undefined || !faceFirstFetched) return;
+    let abortCallback: () => void = () => {};
+
+    const fetch = async () => {
+      for await (const _ of getConnectQueue()) {
+        const { result, abort } = request({
+          method: client.getFaceStatus,
+          retryOptions: {
+            retriesLeft: 3,
+          },
+        });
+        abortCallback = abort;
+        const response = await result;
+        setFaceStatus(response.status);
+      }
+    };
+    fetch().then();
+
+    return abortCallback;
+  }, [client, getConnectQueue]);
+
+  useEffect(() => {
+    let abortCallback: () => void = () => {};
+
+    const fetch = async () => {
+      for await (const _ of getErrorQueue()) {
+        const { result, abort } = request({
+          method: client.getFaceStatus,
+          retryOptions: {
+            retriesLeft: 3,
+          },
+        });
+        abortCallback = abort;
+        try {
+          const response = await result;
+          setFaceStatus(response.status);
+        } catch (e) {
+          setFaceStatus(Status.UNSPECIFIED);
+        }
+      }
+    };
+    fetch().then();
+
+    return abortCallback;
+  }, [getErrorQueue]);
+
+  useEffect(() => {
+    if (faceStream === undefined) return;
 
     const fetch = async () => {
       for await (const message of faceStream) {
@@ -82,19 +167,63 @@ export function StatusProvider({ children }: StatusProviderProps) {
       }
     };
     fetch().then();
-  }, [faceStream === undefined, faceFirstFetched]);
+  }, [faceStream === undefined]);
 
   useEffect(() => {
-    const abort = new AbortController();
-    cilroy.getModuleStatus({}, { signal: abort.signal }).then((response) => {
-      setModuleStatus(response.status);
-      setModuleFirstFetched(true);
-    });
-    return () => abort.abort();
-  }, [cilroy]);
+    const method = client.getModuleStatus;
+    const { result, abort } = request({ method });
+    result.then((response) => setModuleStatus(response.status));
+    return abort;
+  }, [client]);
 
   useEffect(() => {
-    if (moduleStream === undefined || !moduleFirstFetched) return;
+    let abortCallback: () => void = () => {};
+
+    const fetch = async () => {
+      for await (const _ of getConnectQueue()) {
+        const { result, abort } = request({
+          method: client.getModuleStatus,
+          retryOptions: {
+            retriesLeft: 3,
+          },
+        });
+        abortCallback = abort;
+        const response = await result;
+        setModuleStatus(response.status);
+      }
+    };
+    fetch().then();
+
+    return abortCallback;
+  }, [client, getConnectQueue]);
+
+  useEffect(() => {
+    let abortCallback: () => void = () => {};
+
+    const fetch = async () => {
+      for await (const _ of getErrorQueue()) {
+        const { result, abort } = request({
+          method: client.getModuleStatus,
+          retryOptions: {
+            retriesLeft: 3,
+          },
+        });
+        abortCallback = abort;
+        try {
+          const response = await result;
+          setModuleStatus(response.status);
+        } catch (e) {
+          setModuleStatus(Status.UNSPECIFIED);
+        }
+      }
+    };
+    fetch().then();
+
+    return abortCallback;
+  }, [getErrorQueue]);
+
+  useEffect(() => {
+    if (moduleStream === undefined) return;
 
     const fetch = async () => {
       for await (const message of moduleStream) {
@@ -103,7 +232,7 @@ export function StatusProvider({ children }: StatusProviderProps) {
       }
     };
     fetch().then();
-  }, [moduleStream === undefined, moduleFirstFetched]);
+  }, [moduleStream === undefined]);
 
   const status = {
     controller: controllerStatus,

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useCallback } from "react";
 import Head from "next/head";
 import { useLabels } from "../contexts/labels";
 import PageLayout from "../components/PageLayout";
@@ -8,22 +9,31 @@ import { Loader, Title } from "@mantine/core";
 import Segment from "../components/Segment";
 import { useConfigSchema } from "../contexts/configSchema";
 import SchemaBasedForm from "../components/SchemaBasedForm";
-import { useCallback } from "react";
 import { objectDiff } from "../lib/utils";
-import cilroy from "../lib/cilroy";
+import { client, request } from "../lib/cilroy";
+import { useStatus } from "../contexts/status";
+import { Status } from "../lib/protobuf";
 
 export default function Face() {
   const labels = useLabels();
   const { face: config } = useConfig();
   const { face: schema } = useConfigSchema();
+  const { face: faceStatus, controller: controllerStatus } = useStatus();
 
   const handleSubmit = useCallback(
     async (data) => {
       const diff = objectDiff(data, config);
-      if (diff !== null)
-        await cilroy.setFaceConfig({ config: JSON.stringify(diff) });
+      if (diff !== null) {
+        const { result, abort } = request({
+          method: client.setFaceConfig,
+          params: { config: JSON.stringify(diff) },
+          retryOptions: { retriesLeft: 3 },
+        });
+        await result;
+        return abort;
+      }
     },
-    [cilroy, config]
+    [client, config]
   );
 
   return (
@@ -33,7 +43,10 @@ export default function Face() {
       </Head>
       <PageLayout page="face">
         <Segment>
-          {config && schema ? (
+          {config &&
+          schema &&
+          faceStatus !== Status.UNSPECIFIED &&
+          controllerStatus !== Status.UNSPECIFIED ? (
             <>
               <Title order={4}>{labels.face.config}</Title>
               <SchemaBasedForm

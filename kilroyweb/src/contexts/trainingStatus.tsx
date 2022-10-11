@@ -7,7 +7,7 @@ import {
 } from "react";
 import { TrainingStatus, WatchTrainingStatusResponse } from "../lib/protobuf";
 import { useStreams } from "./streams";
-import cilroy from "../lib/cilroy";
+import { client, request } from "../lib/cilroy";
 
 const TrainingStatusContext = createContext<TrainingStatus | null>(null);
 
@@ -18,24 +18,68 @@ export type TrainingStatusProviderProps = {
 export function TrainingStatusProvider({
   children,
 }: TrainingStatusProviderProps) {
-  const [firstFetched, setFirstFetched] = useState(false);
   const [trainingStatus, setTrainingStatus] = useState<TrainingStatus | null>(
     null
   );
 
-  const { WatchTrainingStatus: stream } = useStreams();
+  const { messages, getErrorQueue, getConnectQueue } = useStreams();
+  const { WatchTrainingStatus: stream } = messages;
 
   useEffect(() => {
-    const abort = new AbortController();
-    cilroy.getTrainingStatus({}, { signal: abort.signal }).then((response) => {
-      setTrainingStatus(response.status);
-      setFirstFetched(true);
-    });
-    return () => abort.abort();
-  }, [cilroy]);
+    const method = client.getTrainingStatus;
+    const { result, abort } = request({ method });
+    result.then((response) => setTrainingStatus(response.status));
+    return abort;
+  }, [client]);
 
   useEffect(() => {
-    if (stream === undefined || !firstFetched) return;
+    let abortCallback: () => void = () => {};
+
+    const fetch = async () => {
+      for await (const _ of getConnectQueue()) {
+        const { result, abort } = request({
+          method: client.getTrainingStatus,
+          retryOptions: {
+            retriesLeft: 3,
+          },
+        });
+        abortCallback = abort;
+        const response = await result;
+        setTrainingStatus(response.status);
+      }
+    };
+    fetch().then();
+
+    return abortCallback;
+  }, [client, getConnectQueue]);
+
+  useEffect(() => {
+    let abortCallback: () => void = () => {};
+
+    const fetch = async () => {
+      for await (const _ of getErrorQueue()) {
+        const { result, abort } = request({
+          method: client.getTrainingStatus,
+          retryOptions: {
+            retriesLeft: 3,
+          },
+        });
+        abortCallback = abort;
+        try {
+          const response = await result;
+          setTrainingStatus(response.status);
+        } catch (e) {
+          setTrainingStatus(TrainingStatus.UNSPECIFIED);
+        }
+      }
+    };
+    fetch().then();
+
+    return abortCallback;
+  }, [getErrorQueue]);
+
+  useEffect(() => {
+    if (stream === undefined) return;
 
     const fetch = async () => {
       for await (const message of stream) {
@@ -44,7 +88,7 @@ export function TrainingStatusProvider({
       }
     };
     fetch().then();
-  }, [stream === undefined, firstFetched]);
+  }, [stream === undefined]);
 
   return (
     <TrainingStatusContext.Provider
