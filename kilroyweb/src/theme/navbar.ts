@@ -1,6 +1,7 @@
 import {
   IconChartLine,
   IconCpu,
+  IconMessage,
   IconMoodSmile,
   IconRobot,
 } from "@tabler/icons";
@@ -59,6 +60,12 @@ export const pages: { [key: string]: PageData } = {
     label: "Module",
     path: "/module",
     icon: IconRobot,
+    strokeWidth: defaults.strokeWidth,
+  },
+  feed: {
+    label: "Feed",
+    path: "/feed",
+    icon: IconMessage,
     strokeWidth: defaults.strokeWidth,
   },
 };
