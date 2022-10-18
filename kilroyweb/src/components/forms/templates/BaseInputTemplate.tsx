@@ -12,8 +12,8 @@ import {
 } from "@mantine/core";
 import { countDecimals, getInputProperties } from "../../../lib/utils";
 import { DatePicker, TimeInput } from "@mantine/dates";
-import dayjs from "dayjs";
 import DateTimeInput from "../../DateTimeInput";
+import dayjs from "../../../lib/dayjs";
 
 export type BaseInputTemplateProps = WidgetProps;
 
@@ -118,23 +118,23 @@ export default function BaseInputTemplate({
           {...commonInputProps}
           autoComplete={autoComplete}
           autoFocus={autofocus}
-          defaultValue={value ? dayjs(value).toDate() : undefined}
+          defaultValue={value ? dayjs.utc(value).toDate() : undefined}
           onBlur={(event) =>
             onBlur(
               id,
               event.target.value
-                ? dayjs(event.target.value).toISOString()
+                ? dayjs.utc(event.target.value).toISOString()
                 : undefined
             )
           }
           onChange={(value) =>
-            onChange(value ? dayjs(value).toISOString() : undefined)
+            onChange(value ? dayjs.utc(value).toISOString() : undefined)
           }
           onFocus={(event) =>
             onFocus(
               id,
               event.target.value
-                ? dayjs(event.target.value).toISOString()
+                ? dayjs.utc(event.target.value).toISOString()
                 : undefined
             )
           }
@@ -146,9 +146,9 @@ export default function BaseInputTemplate({
       return (
         <DateTimeInput
           {...commonInputProps}
-          defaultValue={value ? dayjs(value).toDate() : undefined}
+          defaultValue={value ? dayjs.utc(value).toDate() : undefined}
           onChange={(value) =>
-            onChange(value ? dayjs(value).toISOString() : undefined)
+            onChange(value ? dayjs.utc(value).toISOString() : undefined)
           }
           timeProps={{ clearable: true, withSeconds: true }}
         />
@@ -275,9 +275,9 @@ export default function BaseInputTemplate({
         <TimeInput
           {...commonInputProps}
           clearable={true}
-          defaultValue={value ? dayjs(value).toDate() : undefined}
+          defaultValue={value ? dayjs.utc(value).toDate() : undefined}
           onChange={(value) =>
-            onChange(value ? dayjs(value).toISOString() : undefined)
+            onChange(value ? dayjs.utc(value).toISOString() : undefined)
           }
           withSeconds={true}
         />
