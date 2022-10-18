@@ -1,4 +1,4 @@
-import { Group, Loader, Title } from "@mantine/core";
+import { Grid, Group, Loader, Title } from "@mantine/core";
 import { Status, TrainingStatus } from "../lib/protobuf";
 import { useTrainingStatus } from "../contexts/trainingStatus";
 import Center from "./Center";
@@ -19,22 +19,24 @@ export const TrainingStatusDisplay = (props: TrainingStatusDisplayProps) => {
       </Center>
     );
 
+  const statuses = enumToArray(TrainingStatus).filter(
+    (value) => value !== TrainingStatus[TrainingStatus.UNSPECIFIED]
+  );
+
   return (
     <>
       <Title order={4}>Training status</Title>
-      <Group>
-        {enumToArray(TrainingStatus)
-          .filter(
-            (value) => value !== TrainingStatus[TrainingStatus.UNSPECIFIED]
-          )
-          .map((value) => (
+      <Grid columns={3} gutter="xl">
+        {statuses.map((value) => (
+          <Grid.Col span="content">
             <StatusIndicator
               key={value}
               status={value}
               on={TrainingStatus[trainingStatus] === value}
             />
-          ))}
-      </Group>
+          </Grid.Col>
+        ))}
+      </Grid>
     </>
   );
 };

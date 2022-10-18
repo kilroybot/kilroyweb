@@ -8,23 +8,16 @@ import {
   UnstyledButton,
   useMantineColorScheme,
 } from "@mantine/core";
-import { IconMoonStars, IconSun, TablerIcon } from "@tabler/icons";
-import {
-  defaultPadding,
-  defaultPage,
-  defaultStrokeWidth,
-  defaultWidth,
-  Page,
-  pages,
-} from "../theme/navbar";
+import { defaults, Page, PageData, pages } from "../theme/navbar";
 import Link from "./Link";
 import { UnstyledButtonProps } from "@mantine/core/lib/UnstyledButton/UnstyledButton";
+import ColorSchemeIcon, { ColorSchemeIconProps } from "./ColorSchemeIcon";
 
 const useStyles = createStyles((theme) => ({
   entry: {
     width: 50,
     height: 50,
-    borderRadius: theme.radius.md,
+    borderRadius: theme.radius[theme.defaultRadius],
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -69,71 +62,66 @@ function NavbarEntry({ label, className, ...props }: NavbarEntryProps) {
 }
 
 type NavbarLinkProps = {
-  icon: TablerIcon;
-  label: string;
+  page: PageData;
   active?: boolean;
-  href?: string;
-  strokeWidth?: number;
 };
 
-function NavbarLink({
-  icon: Icon,
-  label,
-  active,
-  href,
-  strokeWidth,
-}: NavbarLinkProps) {
+function NavbarLink({ page, active }: NavbarLinkProps) {
   const { classes } = useStyles();
 
   return (
-    <Link href={href}>
-      <NavbarEntry label={label} className={active && classes.active}>
-        <Icon stroke={strokeWidth} />
+    <Link href={page.path}>
+      <NavbarEntry label={page.label} className={active && classes.active}>
+        <page.icon stroke={page.strokeWidth} />
       </NavbarEntry>
     </Link>
   );
 }
 
-type ColorSchemeToggleProps = {};
+type ColorSchemeToggleProps = ColorSchemeIconProps;
 
-function ColorSchemeToggle({}: ColorSchemeToggleProps) {
-  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+function ColorSchemeToggle({
+  strokeWidth = defaults.strokeWidth,
+  ...props
+}: ColorSchemeToggleProps) {
+  const { toggleColorScheme } = useMantineColorScheme();
 
   return (
     <NavbarEntry
       label="Toggle color scheme"
       onClick={() => toggleColorScheme()}
     >
-      {colorScheme === "dark" ? <IconSun /> : <IconMoonStars />}
+      <ColorSchemeIcon strokeWidth={strokeWidth} {...props} />
     </NavbarEntry>
   );
 }
 
 export type NavbarProps = Omit<MantineNavbarProps, "children"> & {
   page?: Page;
-  iconsStrokeWidth?: number;
 };
 
 export default function Navbar({
-  width = defaultWidth,
-  p = defaultPadding,
-  page = defaultPage,
-  iconsStrokeWidth = defaultStrokeWidth,
+  width = defaults.vertical.width,
+  py = defaults.vertical.py,
+  px = defaults.vertical.px,
+  page = defaults.page,
   ...props
 }: NavbarProps) {
-  const links = Object.keys(pages).map((key) => (
-    <NavbarLink
-      key={key}
-      label={pages[key].label}
-      icon={pages[key].icon}
-      href={pages[key].path}
-      active={key === page}
-      strokeWidth={iconsStrokeWidth}
-    />
+  const { home: homePage, ...otherPages } = pages;
+
+  const links = Object.keys(otherPages).map((key) => (
+    <NavbarLink key={key} page={pages[key]} active={key === page} />
   ));
 
   return (
-    <MantineNavbar width={width} p={p} {...props}>
+    <MantineNavbar width={width} style={{ top: 0 }} py={py} px={px} {...props}>
+      <MantineNavbar.Section>
+        <Center style={{ height: "100%" }}>
+          <Stack spacing={0}>
+            <NavbarLink page={homePage} active={page === "home"} />
+          </Stack>
+        </Center>
+      </MantineNavbar.Section>
       <MantineNavbar.Section grow>
         <Center style={{ height: "100%" }}>
           <Stack spacing={0}>{links}</Stack>

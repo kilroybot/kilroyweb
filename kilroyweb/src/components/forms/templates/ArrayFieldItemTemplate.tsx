@@ -1,5 +1,5 @@
 import { ArrayFieldTemplateItemType } from "@rjsf/utils";
-import { Box, Button, createStyles } from "@mantine/core";
+import { Box, Button, createStyles, Grid } from "@mantine/core";
 import { cloneElement } from "react";
 import { toOrdinal } from "../../../lib/utils";
 import { IconArrowDown, IconArrowUp, IconTrash } from "@tabler/icons";
@@ -37,33 +37,42 @@ export default function ArrayFieldItemTemplate({
   });
 
   return (
-    <Box className={classes.container}>
-      <Box className={classes.item}>{newChildren}</Box>
-      {hasToolbar && (
-        <Button.Group>
-          <Button
-            variant="default"
-            disabled={disabled || readonly || !hasMoveUp}
-            onClick={onReorderClick(index, index - 1)}
-          >
-            <IconArrowUp size="75%" />
-          </Button>
-          <Button
-            variant="default"
-            disabled={disabled || readonly || !hasMoveDown}
-            onClick={onReorderClick(index, index + 1)}
-          >
-            <IconArrowDown size="75%" />
-          </Button>
-          <Button
-            variant="default"
-            disabled={disabled || readonly || !hasRemove}
-            onClick={onDropIndexClick(index)}
-          >
-            <IconTrash size="75%" />
-          </Button>
-        </Button.Group>
-      )}
+    <Box>
+      <Grid columns={6} gutter="md">
+        <Grid.Col sm="auto">
+          <Box>{newChildren}</Box>
+        </Grid.Col>
+        {hasToolbar && (
+          <Grid.Col sm="content" style={{ alignSelf: "end" }}>
+            <Button.Group>
+              <Button
+                variant="default"
+                disabled={disabled || readonly || !hasMoveUp}
+                onClick={onReorderClick(index, index - 1)}
+                fullWidth
+              >
+                <IconArrowUp size="75%" />
+              </Button>
+              <Button
+                variant="default"
+                disabled={disabled || readonly || !hasMoveDown}
+                onClick={onReorderClick(index, index + 1)}
+                fullWidth
+              >
+                <IconArrowDown size="75%" />
+              </Button>
+              <Button
+                variant="default"
+                disabled={disabled || readonly || !hasRemove}
+                onClick={onDropIndexClick(index)}
+                fullWidth
+              >
+                <IconTrash size="75%" />
+              </Button>
+            </Button.Group>
+          </Grid.Col>
+        )}
+      </Grid>
     </Box>
   );
 }

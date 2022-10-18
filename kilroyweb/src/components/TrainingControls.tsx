@@ -1,4 +1,4 @@
-import { Button, Group, Loader, Title } from "@mantine/core";
+import { Button, Grid, Group, Loader, Title } from "@mantine/core";
 import { Status, TrainingStatus } from "../lib/protobuf";
 import * as React from "react";
 import { useCallback } from "react";
@@ -54,26 +54,35 @@ export default function TrainingControls({}: TrainingControlsProps) {
   return (
     <>
       <Title order={4}>Controls</Title>
-      <Group grow>
-        <Button
-          disabled={trainingStatus !== TrainingStatus.IDLE}
-          onClick={onStartOfflineClick}
-        >
-          Start offline
-        </Button>
-        <Button
-          disabled={trainingStatus !== TrainingStatus.IDLE}
-          onClick={onStartOnlineClick}
-        >
-          Start online
-        </Button>
-        <Button
-          disabled={trainingStatus === TrainingStatus.IDLE}
-          onClick={onStopClick}
-        >
-          Stop
-        </Button>
-      </Group>
+      <Grid columns={3} gutter="md">
+        <Grid.Col span="auto">
+          <Button
+            disabled={trainingStatus !== TrainingStatus.IDLE}
+            onClick={onStartOfflineClick}
+            fullWidth
+          >
+            Start offline
+          </Button>
+        </Grid.Col>
+        <Grid.Col span="auto">
+          <Button
+            disabled={trainingStatus !== TrainingStatus.IDLE}
+            onClick={onStartOnlineClick}
+            fullWidth
+          >
+            Start online
+          </Button>
+        </Grid.Col>
+        <Grid.Col span="auto">
+          <Button
+            disabled={trainingStatus === TrainingStatus.IDLE}
+            onClick={onStopClick}
+            fullWidth
+          >
+            Stop
+          </Button>
+        </Grid.Col>
+      </Grid>
     </>
   );
 }

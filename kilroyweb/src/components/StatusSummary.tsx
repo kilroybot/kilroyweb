@@ -1,5 +1,6 @@
 import {
   Center,
+  Grid,
   List,
   Loader,
   Stack,
@@ -44,29 +45,35 @@ export const StatusSummary = (props: StatusSummaryProps) => {
   return (
     <>
       <Title order={4}>Status</Title>
-      <Stack>
-        <StatusIndicator
-          status="Controller"
-          on={status.controller === Status.READY}
-          onColor={onColor}
-          offColor={offColor}
-          offGlow={true}
-        />
-        <StatusIndicator
-          status="Face"
-          on={status.face === Status.READY}
-          onColor={onColor}
-          offColor={offColor}
-          offGlow={true}
-        />
-        <StatusIndicator
-          status="Module"
-          on={status.module === Status.READY}
-          onColor={onColor}
-          offColor={offColor}
-          offGlow={true}
-        />
-      </Stack>
+      <Grid columns={3} gutter="xl">
+        <Grid.Col span="content" md={3}>
+          <StatusIndicator
+            status="Controller"
+            on={status.controller === Status.READY}
+            onColor={onColor}
+            offColor={offColor}
+            offGlow={true}
+          />
+        </Grid.Col>
+        <Grid.Col span="content" md={3}>
+          <StatusIndicator
+            status="Face"
+            on={status.face === Status.READY}
+            onColor={onColor}
+            offColor={offColor}
+            offGlow={true}
+          />
+        </Grid.Col>
+        <Grid.Col span="content" md={3}>
+          <StatusIndicator
+            status="Module"
+            on={status.module === Status.READY}
+            onColor={onColor}
+            offColor={offColor}
+            offGlow={true}
+          />
+        </Grid.Col>
+      </Grid>
     </>
   );
 };

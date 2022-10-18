@@ -24,13 +24,13 @@ export default function Training() {
       </Head>
       <PageLayout page="training">
         <Stack spacing="lg">
-          <Grid gutter="lg" grow>
-            <Grid.Col span={4}>
+          <Grid columns={5} gutter="lg" grow>
+            <Grid.Col md={3}>
               <Segment>
                 <TrainingControls />
               </Segment>
             </Grid.Col>
-            <Grid.Col span={1}>
+            <Grid.Col md={2}>
               <Segment>
                 <TrainingStatusDisplay />
               </Segment>
