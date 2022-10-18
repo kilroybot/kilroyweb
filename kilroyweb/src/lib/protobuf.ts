@@ -2831,7 +2831,8 @@ export class MetricConfig extends Message<MetricConfig> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "label", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "config", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "group", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "config", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
   /**
    * @generated from field: string id = 1;
@@ -2842,7 +2843,11 @@ export class MetricConfig extends Message<MetricConfig> {
    */
   label = "";
   /**
-   * @generated from field: string config = 3;
+   * @generated from field: string group = 3;
+   */
+  group = "";
+  /**
+   * @generated from field: string config = 4;
    */
   config = "";
 
@@ -3350,5 +3355,515 @@ export class WatchAllResponse extends Message<WatchAllResponse> {
     b: WatchAllResponse | PlainMessage<WatchAllResponse> | undefined
   ): boolean {
     return proto3.util.equals(WatchAllResponse, a, b);
+  }
+}
+
+/**
+ * @generated from message kilroy.cilroy.v1alpha.ResetControllerRequest
+ */
+export class ResetControllerRequest extends Message<ResetControllerRequest> {
+  constructor(data?: PartialMessage<ResetControllerRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.ResetControllerRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => []);
+
+  static fromBinary(
+    bytes: Uint8Array,
+    options?: Partial<BinaryReadOptions>
+  ): ResetControllerRequest {
+    return new ResetControllerRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(
+    jsonValue: JsonValue,
+    options?: Partial<JsonReadOptions>
+  ): ResetControllerRequest {
+    return new ResetControllerRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(
+    jsonString: string,
+    options?: Partial<JsonReadOptions>
+  ): ResetControllerRequest {
+    return new ResetControllerRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(
+    a:
+      | ResetControllerRequest
+      | PlainMessage<ResetControllerRequest>
+      | undefined,
+    b: ResetControllerRequest | PlainMessage<ResetControllerRequest> | undefined
+  ): boolean {
+    return proto3.util.equals(ResetControllerRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message kilroy.cilroy.v1alpha.ResetControllerResponse
+ */
+export class ResetControllerResponse extends Message<ResetControllerResponse> {
+  constructor(data?: PartialMessage<ResetControllerResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.ResetControllerResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => []);
+
+  static fromBinary(
+    bytes: Uint8Array,
+    options?: Partial<BinaryReadOptions>
+  ): ResetControllerResponse {
+    return new ResetControllerResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(
+    jsonValue: JsonValue,
+    options?: Partial<JsonReadOptions>
+  ): ResetControllerResponse {
+    return new ResetControllerResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(
+    jsonString: string,
+    options?: Partial<JsonReadOptions>
+  ): ResetControllerResponse {
+    return new ResetControllerResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(
+    a:
+      | ResetControllerResponse
+      | PlainMessage<ResetControllerResponse>
+      | undefined,
+    b:
+      | ResetControllerResponse
+      | PlainMessage<ResetControllerResponse>
+      | undefined
+  ): boolean {
+    return proto3.util.equals(ResetControllerResponse, a, b);
+  }
+}
+
+/**
+ * @generated from message kilroy.cilroy.v1alpha.ResetFaceRequest
+ */
+export class ResetFaceRequest extends Message<ResetFaceRequest> {
+  constructor(data?: PartialMessage<ResetFaceRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.ResetFaceRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => []);
+
+  static fromBinary(
+    bytes: Uint8Array,
+    options?: Partial<BinaryReadOptions>
+  ): ResetFaceRequest {
+    return new ResetFaceRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(
+    jsonValue: JsonValue,
+    options?: Partial<JsonReadOptions>
+  ): ResetFaceRequest {
+    return new ResetFaceRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(
+    jsonString: string,
+    options?: Partial<JsonReadOptions>
+  ): ResetFaceRequest {
+    return new ResetFaceRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(
+    a: ResetFaceRequest | PlainMessage<ResetFaceRequest> | undefined,
+    b: ResetFaceRequest | PlainMessage<ResetFaceRequest> | undefined
+  ): boolean {
+    return proto3.util.equals(ResetFaceRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message kilroy.cilroy.v1alpha.ResetFaceResponse
+ */
+export class ResetFaceResponse extends Message<ResetFaceResponse> {
+  constructor(data?: PartialMessage<ResetFaceResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.ResetFaceResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => []);
+
+  static fromBinary(
+    bytes: Uint8Array,
+    options?: Partial<BinaryReadOptions>
+  ): ResetFaceResponse {
+    return new ResetFaceResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(
+    jsonValue: JsonValue,
+    options?: Partial<JsonReadOptions>
+  ): ResetFaceResponse {
+    return new ResetFaceResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(
+    jsonString: string,
+    options?: Partial<JsonReadOptions>
+  ): ResetFaceResponse {
+    return new ResetFaceResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(
+    a: ResetFaceResponse | PlainMessage<ResetFaceResponse> | undefined,
+    b: ResetFaceResponse | PlainMessage<ResetFaceResponse> | undefined
+  ): boolean {
+    return proto3.util.equals(ResetFaceResponse, a, b);
+  }
+}
+
+/**
+ * @generated from message kilroy.cilroy.v1alpha.ResetModuleRequest
+ */
+export class ResetModuleRequest extends Message<ResetModuleRequest> {
+  constructor(data?: PartialMessage<ResetModuleRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.ResetModuleRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => []);
+
+  static fromBinary(
+    bytes: Uint8Array,
+    options?: Partial<BinaryReadOptions>
+  ): ResetModuleRequest {
+    return new ResetModuleRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(
+    jsonValue: JsonValue,
+    options?: Partial<JsonReadOptions>
+  ): ResetModuleRequest {
+    return new ResetModuleRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(
+    jsonString: string,
+    options?: Partial<JsonReadOptions>
+  ): ResetModuleRequest {
+    return new ResetModuleRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(
+    a: ResetModuleRequest | PlainMessage<ResetModuleRequest> | undefined,
+    b: ResetModuleRequest | PlainMessage<ResetModuleRequest> | undefined
+  ): boolean {
+    return proto3.util.equals(ResetModuleRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message kilroy.cilroy.v1alpha.ResetModuleResponse
+ */
+export class ResetModuleResponse extends Message<ResetModuleResponse> {
+  constructor(data?: PartialMessage<ResetModuleResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.ResetModuleResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => []);
+
+  static fromBinary(
+    bytes: Uint8Array,
+    options?: Partial<BinaryReadOptions>
+  ): ResetModuleResponse {
+    return new ResetModuleResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(
+    jsonValue: JsonValue,
+    options?: Partial<JsonReadOptions>
+  ): ResetModuleResponse {
+    return new ResetModuleResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(
+    jsonString: string,
+    options?: Partial<JsonReadOptions>
+  ): ResetModuleResponse {
+    return new ResetModuleResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(
+    a: ResetModuleResponse | PlainMessage<ResetModuleResponse> | undefined,
+    b: ResetModuleResponse | PlainMessage<ResetModuleResponse> | undefined
+  ): boolean {
+    return proto3.util.equals(ResetModuleResponse, a, b);
+  }
+}
+
+/**
+ * @generated from message kilroy.cilroy.v1alpha.Post
+ */
+export class Post extends Message<Post> {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id = "";
+
+  /**
+   * @generated from field: string url = 2;
+   */
+  url = "";
+
+  /**
+   * @generated from field: string content = 3;
+   */
+  content = "";
+
+  /**
+   * @generated from field: string created_at = 4;
+   */
+  createdAt = "";
+
+  constructor(data?: PartialMessage<Post>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.Post";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "url", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "content", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "created_at", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(
+    bytes: Uint8Array,
+    options?: Partial<BinaryReadOptions>
+  ): Post {
+    return new Post().fromBinary(bytes, options);
+  }
+
+  static fromJson(
+    jsonValue: JsonValue,
+    options?: Partial<JsonReadOptions>
+  ): Post {
+    return new Post().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(
+    jsonString: string,
+    options?: Partial<JsonReadOptions>
+  ): Post {
+    return new Post().fromJsonString(jsonString, options);
+  }
+
+  static equals(
+    a: Post | PlainMessage<Post> | undefined,
+    b: Post | PlainMessage<Post> | undefined
+  ): boolean {
+    return proto3.util.equals(Post, a, b);
+  }
+}
+
+/**
+ * @generated from message kilroy.cilroy.v1alpha.GetFeedRequest
+ */
+export class GetFeedRequest extends Message<GetFeedRequest> {
+  constructor(data?: PartialMessage<GetFeedRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.GetFeedRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => []);
+
+  static fromBinary(
+    bytes: Uint8Array,
+    options?: Partial<BinaryReadOptions>
+  ): GetFeedRequest {
+    return new GetFeedRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(
+    jsonValue: JsonValue,
+    options?: Partial<JsonReadOptions>
+  ): GetFeedRequest {
+    return new GetFeedRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(
+    jsonString: string,
+    options?: Partial<JsonReadOptions>
+  ): GetFeedRequest {
+    return new GetFeedRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(
+    a: GetFeedRequest | PlainMessage<GetFeedRequest> | undefined,
+    b: GetFeedRequest | PlainMessage<GetFeedRequest> | undefined
+  ): boolean {
+    return proto3.util.equals(GetFeedRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message kilroy.cilroy.v1alpha.GetFeedResponse
+ */
+export class GetFeedResponse extends Message<GetFeedResponse> {
+  /**
+   * @generated from field: repeated kilroy.cilroy.v1alpha.Post posts = 1;
+   */
+  posts: Post[] = [];
+
+  constructor(data?: PartialMessage<GetFeedResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.GetFeedResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "posts", kind: "message", T: Post, repeated: true },
+  ]);
+
+  static fromBinary(
+    bytes: Uint8Array,
+    options?: Partial<BinaryReadOptions>
+  ): GetFeedResponse {
+    return new GetFeedResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(
+    jsonValue: JsonValue,
+    options?: Partial<JsonReadOptions>
+  ): GetFeedResponse {
+    return new GetFeedResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(
+    jsonString: string,
+    options?: Partial<JsonReadOptions>
+  ): GetFeedResponse {
+    return new GetFeedResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(
+    a: GetFeedResponse | PlainMessage<GetFeedResponse> | undefined,
+    b: GetFeedResponse | PlainMessage<GetFeedResponse> | undefined
+  ): boolean {
+    return proto3.util.equals(GetFeedResponse, a, b);
+  }
+}
+
+/**
+ * @generated from message kilroy.cilroy.v1alpha.WatchFeedRequest
+ */
+export class WatchFeedRequest extends Message<WatchFeedRequest> {
+  constructor(data?: PartialMessage<WatchFeedRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.WatchFeedRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => []);
+
+  static fromBinary(
+    bytes: Uint8Array,
+    options?: Partial<BinaryReadOptions>
+  ): WatchFeedRequest {
+    return new WatchFeedRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(
+    jsonValue: JsonValue,
+    options?: Partial<JsonReadOptions>
+  ): WatchFeedRequest {
+    return new WatchFeedRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(
+    jsonString: string,
+    options?: Partial<JsonReadOptions>
+  ): WatchFeedRequest {
+    return new WatchFeedRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(
+    a: WatchFeedRequest | PlainMessage<WatchFeedRequest> | undefined,
+    b: WatchFeedRequest | PlainMessage<WatchFeedRequest> | undefined
+  ): boolean {
+    return proto3.util.equals(WatchFeedRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message kilroy.cilroy.v1alpha.WatchFeedResponse
+ */
+export class WatchFeedResponse extends Message<WatchFeedResponse> {
+  /**
+   * @generated from field: kilroy.cilroy.v1alpha.Post post = 1;
+   */
+  post?: Post;
+
+  constructor(data?: PartialMessage<WatchFeedResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.WatchFeedResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "post", kind: "message", T: Post },
+  ]);
+
+  static fromBinary(
+    bytes: Uint8Array,
+    options?: Partial<BinaryReadOptions>
+  ): WatchFeedResponse {
+    return new WatchFeedResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(
+    jsonValue: JsonValue,
+    options?: Partial<JsonReadOptions>
+  ): WatchFeedResponse {
+    return new WatchFeedResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(
+    jsonString: string,
+    options?: Partial<JsonReadOptions>
+  ): WatchFeedResponse {
+    return new WatchFeedResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(
+    a: WatchFeedResponse | PlainMessage<WatchFeedResponse> | undefined,
+    b: WatchFeedResponse | PlainMessage<WatchFeedResponse> | undefined
+  ): boolean {
+    return proto3.util.equals(WatchFeedResponse, a, b);
   }
 }

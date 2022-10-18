@@ -15,6 +15,8 @@ import {
   GetFacePostSchemaResponse,
   GetFaceStatusRequest,
   GetFaceStatusResponse,
+  GetFeedRequest,
+  GetFeedResponse,
   GetModuleConfigRequest,
   GetModuleConfigResponse,
   GetModuleConfigSchemaRequest,
@@ -31,6 +33,12 @@ import {
   GetModuleStatusResponse,
   GetTrainingStatusRequest,
   GetTrainingStatusResponse,
+  ResetControllerRequest,
+  ResetControllerResponse,
+  ResetFaceRequest,
+  ResetFaceResponse,
+  ResetModuleRequest,
+  ResetModuleResponse,
   SetControllerConfigRequest,
   SetControllerConfigResponse,
   SetFaceConfigRequest,
@@ -53,6 +61,8 @@ import {
   WatchFaceConfigResponse,
   WatchFaceStatusRequest,
   WatchFaceStatusResponse,
+  WatchFeedRequest,
+  WatchFeedResponse,
   WatchModuleConfigRequest,
   WatchModuleConfigResponse,
   WatchModuleMetricsRequest,
@@ -347,6 +357,51 @@ export const CilroyService = {
       name: "WatchAll",
       I: WatchAllRequest,
       O: WatchAllResponse,
+      kind: MethodKind.ServerStreaming,
+    },
+    /**
+     * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.ResetController
+     */
+    resetController: {
+      name: "ResetController",
+      I: ResetControllerRequest,
+      O: ResetControllerResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.ResetFace
+     */
+    resetFace: {
+      name: "ResetFace",
+      I: ResetFaceRequest,
+      O: ResetFaceResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.ResetModule
+     */
+    resetModule: {
+      name: "ResetModule",
+      I: ResetModuleRequest,
+      O: ResetModuleResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.GetFeed
+     */
+    getFeed: {
+      name: "GetFeed",
+      I: GetFeedRequest,
+      O: GetFeedResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.WatchFeed
+     */
+    watchFeed: {
+      name: "WatchFeed",
+      I: WatchFeedRequest,
+      O: WatchFeedResponse,
       kind: MethodKind.ServerStreaming,
     },
   },
