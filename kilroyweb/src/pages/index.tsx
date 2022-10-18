@@ -26,18 +26,18 @@ export default function Index() {
           <Segment>
             <MetricsSummary />
           </Segment>
-          <Grid gutter="md">
-            <Grid.Col>
+          <Grid columns={2} gutter="md">
+            <Grid.Col span={2}>
               <Segment>
                 <MetadataSummary />
               </Segment>
             </Grid.Col>
-            <Grid.Col span={6}>
+            <Grid.Col sm={1}>
               <Segment>
                 <TrainingStatusSummary />
               </Segment>
             </Grid.Col>
-            <Grid.Col span={6}>
+            <Grid.Col sm={1}>
               <Segment>
                 <StatusSummary />
               </Segment>

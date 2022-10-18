@@ -4,6 +4,7 @@ import { BaseChartProps } from "./BaseChart";
 import dynamic from "next/dynamic";
 import { useEffect, useImperativeHandle, useMemo, useRef } from "react";
 import ChartJS from "chart.js/auto";
+import { useMediaQuery } from "@mantine/hooks";
 
 const BaseChart = dynamic(() => import("./BaseChart"), {
   ssr: false,
@@ -22,9 +23,11 @@ export default function Chart({
   useImperativeHandle(chartRef, () => internalChartRef.current);
 
   const theme = useMantineTheme();
+  const big = useMediaQuery(`(min-width: ${theme.breakpoints.sm}px)`);
 
   const defaults = {
     options: {
+      animation: false,
       scales: {
         x: {
           grid: {
@@ -38,13 +41,17 @@ export default function Chart({
                 : theme.colors.gray[2],
           },
           ticks: {
+            display: true,
+            font: {
+              size: big ? 12 : 6,
+            },
             color:
               theme.colorScheme === "dark"
                 ? theme.colors.gray[6]
                 : theme.colors.gray[7],
           },
           title: {
-            display: true,
+            display: big,
             color:
               theme.colorScheme === "dark"
                 ? theme.colors.gray[6]
@@ -64,13 +71,17 @@ export default function Chart({
                 : theme.colors.gray[2],
           },
           ticks: {
+            display: true,
+            font: {
+              size: big ? 12 : 6,
+            },
             color:
               theme.colorScheme === "dark"
                 ? theme.colors.gray[6]
                 : theme.colors.gray[7],
           },
           title: {
-            display: true,
+            display: big,
             color:
               theme.colorScheme === "dark"
                 ? theme.colors.gray[6]
