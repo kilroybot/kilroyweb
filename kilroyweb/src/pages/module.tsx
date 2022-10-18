@@ -5,7 +5,7 @@ import { useLabels } from "../contexts/labels";
 import PageLayout from "../components/PageLayout";
 import { useConfig } from "../contexts/config";
 import Center from "../components/Center";
-import { Loader, Title } from "@mantine/core";
+import { Button, Loader, Title } from "@mantine/core";
 import Segment from "../components/Segment";
 import { useConfigSchema } from "../contexts/configSchema";
 import SchemaBasedForm from "../components/SchemaBasedForm";
@@ -36,6 +36,16 @@ export default function Module() {
     [client, config]
   );
 
+  const handleReset = useCallback(async () => {
+    const { result, abort } = request({
+      method: client.resetModule,
+      params: {},
+      retryOptions: { retriesLeft: 3 },
+    });
+    await result;
+    return abort;
+  }, [client]);
+
   return (
     <>
       <Head>
@@ -48,12 +58,27 @@ export default function Module() {
           moduleStatus !== Status.UNSPECIFIED &&
           controllerStatus !== Status.UNSPECIFIED ? (
             <>
-              <Title order={4}>{labels.module.config}</Title>
+              <Title order={4}>{labels.module.config.title}</Title>
               <SchemaBasedForm
                 schema={schema}
                 data={config}
                 onSubmit={handleSubmit}
               />
+            </>
+          ) : (
+            <Center>
+              <Loader />
+            </Center>
+          )}
+        </Segment>
+        <Segment>
+          {moduleStatus !== Status.UNSPECIFIED &&
+          controllerStatus !== Status.UNSPECIFIED ? (
+            <>
+              <Title order={4}>{labels.module.dangerZone.title}</Title>
+              <Button onClick={handleReset}>
+                {labels.module.dangerZone.buttons.reset}
+              </Button>
             </>
           ) : (
             <Center>

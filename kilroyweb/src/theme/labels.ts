@@ -19,15 +19,43 @@ const labels = {
   },
   controller: {
     title: "Controller",
-    config: "Configuration",
+    config: {
+      title: "Configuration",
+    },
+    dangerZone: {
+      title: "Danger Zone",
+      buttons: {
+        reset: "Reset state",
+      },
+    },
   },
   face: {
     title: "Face",
-    config: "Configuration",
+    config: {
+      title: "Configuration",
+    },
+    dangerZone: {
+      title: "Danger Zone",
+      buttons: {
+        reset: "Reset state",
+      },
+    },
   },
   module: {
     title: "Module",
-    config: "Configuration",
+    config: {
+      title: "Configuration",
+    },
+    dangerZone: {
+      title: "Danger Zone",
+      buttons: {
+        reset: "Reset state",
+      },
+    },
+  },
+  feed: {
+    title: "Feed",
+    empty: "No posts yet",
   },
 };
 
