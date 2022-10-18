@@ -1,4 +1,4 @@
-import { createStyles, Loader, Stack, Text, Title } from "@mantine/core";
+import { createStyles, Loader, Stack, Title } from "@mantine/core";
 import useMetrics from "../hooks/useMetrics";
 import Carousel from "./Carousel";
 import Center from "./Center";
@@ -39,7 +39,7 @@ export const MetricsSummary = (props: MetricsSummaryProps) => {
         <Carousel
           slideGap="xl"
           controlsOffset={0}
-          draggable={false}
+          draggable={true}
           className={classes.carousel}
         >
           {Object.keys(metrics).map((metricId) => (
