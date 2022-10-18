@@ -4,6 +4,7 @@ import { ChartProps } from "react-chartjs-2/dist/types";
 export type Metric = {
   id: string;
   label: string;
+  group: string;
   chartData: ChartProps;
 };
 
@@ -22,6 +23,7 @@ export default function useMetrics(): Metrics | undefined {
     const metric = {
       id: config.id,
       label: config.label,
+      group: config.group,
       chartData: chartData,
     };
     return {
