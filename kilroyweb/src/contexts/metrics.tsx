@@ -73,6 +73,7 @@ export function RawMetricsProvider({ children }: RawMetricsProviderProps) {
       for await (const message of stream) {
         const response = WatchModuleMetricsResponse.fromJsonString(message);
         setData((prev) => {
+          if (prev === undefined) return [response.metric];
           return [...prev, response.metric];
         });
       }
