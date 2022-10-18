@@ -2,17 +2,24 @@ import { useMantineTheme } from "@mantine/core";
 import { merge } from "lodash-es";
 import { BaseChartProps } from "./BaseChart";
 import dynamic from "next/dynamic";
-import { useRef } from "react";
+import { useEffect, useImperativeHandle, useMemo, useRef } from "react";
 import ChartJS from "chart.js/auto";
 
 const BaseChart = dynamic(() => import("./BaseChart"), {
   ssr: false,
 });
 
-export type ChartProps = BaseChartProps;
+export type ChartProps = BaseChartProps & {
+  onDataUpdate?: (chart: ChartJS) => void;
+};
 
-export default function Chart({ onDoubleClick, ...props }: ChartProps) {
-  const chartRef = useRef<ChartJS>(null);
+export default function Chart({
+  chartRef,
+  onDataUpdate,
+  ...props
+}: ChartProps) {
+  const internalChartRef = useRef<ChartJS>(null);
+  useImperativeHandle(chartRef, () => internalChartRef.current);
 
   const theme = useMantineTheme();
 
@@ -76,21 +83,6 @@ export default function Chart({ onDoubleClick, ...props }: ChartProps) {
         legend: {
           display: false,
         },
-        zoom: {
-          pan: {
-            enabled: true,
-            modifierKey: "ctrl",
-          },
-          zoom: {
-            wheel: {
-              enabled: true,
-              modifierKey: "ctrl",
-            },
-            pinch: {
-              enabled: true,
-            },
-          },
-        },
       },
     },
   };
@@ -117,16 +109,23 @@ export default function Chart({ onDoubleClick, ...props }: ChartProps) {
     merge(dataset || {}, datasetDefaults)
   );
 
-  const handleDoubleClick = (event: any) => {
-    if (chartRef.current) chartRef.current.resetZoom();
-    if (onDoubleClick) onDoubleClick(event);
-  };
+  const { data, options, ...otherProps } = mergedProps;
+
+  const memoizedData = useMemo(() => data, [JSON.stringify(data)]);
+  const memoizedOptions = useMemo(() => options, [JSON.stringify(options)]);
+
+  useEffect(() => {
+    if (internalChartRef.current && onDataUpdate) {
+      onDataUpdate(internalChartRef.current);
+    }
+  }, [internalChartRef.current, onDataUpdate]);
 
   return (
     <BaseChart
-      chartRef={chartRef}
-      onDoubleClick={handleDoubleClick}
-      {...mergedProps}
+      data={memoizedData}
+      options={memoizedOptions}
+      chartRef={internalChartRef}
+      {...otherProps}
     />
   );
 }
