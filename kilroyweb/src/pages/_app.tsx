@@ -26,6 +26,7 @@ import { ConfigProvider } from "../contexts/config";
 import { StreamsProvider } from "../contexts/streams";
 import { ConfigSchemaProvider } from "../contexts/configSchema";
 import { MetadataProvider } from "../contexts/metadata";
+import { FeedProvider } from "../contexts/feed";
 import { PostSchemaProvider } from "../contexts/postSchema";
 
 type MantineAppProps = {
@@ -81,8 +82,10 @@ export default function App(props: ExtendedAppProps) {
                           <PostSchemaProvider>
                             <ConfigSchemaProvider>
                               <ConfigProvider>
+                                <FeedProvider>
                                   <RouterTransition />
                                   <props.Component {...props.pageProps} />
+                                </FeedProvider>
                               </ConfigProvider>
                             </ConfigSchemaProvider>
                           </PostSchemaProvider>
