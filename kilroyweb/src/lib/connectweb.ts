@@ -1,4 +1,6 @@
 import {
+  GeneratePostsRequest,
+  GeneratePostsResponse,
   GetControllerConfigRequest,
   GetControllerConfigResponse,
   GetControllerConfigSchemaRequest,
@@ -402,6 +404,15 @@ export const CilroyService = {
       name: "WatchFeed",
       I: WatchFeedRequest,
       O: WatchFeedResponse,
+      kind: MethodKind.ServerStreaming,
+    },
+    /**
+     * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.GeneratePosts
+     */
+    generatePosts: {
+      name: "GeneratePosts",
+      I: GeneratePostsRequest,
+      O: GeneratePostsResponse,
       kind: MethodKind.ServerStreaming,
     },
   },

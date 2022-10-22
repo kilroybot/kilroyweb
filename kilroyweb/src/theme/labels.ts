@@ -57,6 +57,12 @@ const labels = {
     title: "Feed",
     empty: "No posts yet",
   },
+  playground: {
+    title: "Playground",
+    buttons: {
+      generate: "Generate",
+    },
+  },
 };
 
 export type Labels = typeof labels;

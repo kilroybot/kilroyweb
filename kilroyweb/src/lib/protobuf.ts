@@ -3867,3 +3867,101 @@ export class WatchFeedResponse extends Message<WatchFeedResponse> {
     return proto3.util.equals(WatchFeedResponse, a, b);
   }
 }
+
+/**
+ * @generated from message kilroy.cilroy.v1alpha.GeneratePostsRequest
+ */
+export class GeneratePostsRequest extends Message<GeneratePostsRequest> {
+  /**
+   * @generated from field: uint64 quantity = 1;
+   */
+  quantity = protoInt64.zero;
+
+  constructor(data?: PartialMessage<GeneratePostsRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.GeneratePostsRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "quantity", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+  ]);
+
+  static fromBinary(
+    bytes: Uint8Array,
+    options?: Partial<BinaryReadOptions>
+  ): GeneratePostsRequest {
+    return new GeneratePostsRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(
+    jsonValue: JsonValue,
+    options?: Partial<JsonReadOptions>
+  ): GeneratePostsRequest {
+    return new GeneratePostsRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(
+    jsonString: string,
+    options?: Partial<JsonReadOptions>
+  ): GeneratePostsRequest {
+    return new GeneratePostsRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(
+    a: GeneratePostsRequest | PlainMessage<GeneratePostsRequest> | undefined,
+    b: GeneratePostsRequest | PlainMessage<GeneratePostsRequest> | undefined
+  ): boolean {
+    return proto3.util.equals(GeneratePostsRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message kilroy.cilroy.v1alpha.GeneratePostsResponse
+ */
+export class GeneratePostsResponse extends Message<GeneratePostsResponse> {
+  /**
+   * @generated from field: string content = 1;
+   */
+  content = "";
+
+  constructor(data?: PartialMessage<GeneratePostsResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.GeneratePostsResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "content", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(
+    bytes: Uint8Array,
+    options?: Partial<BinaryReadOptions>
+  ): GeneratePostsResponse {
+    return new GeneratePostsResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(
+    jsonValue: JsonValue,
+    options?: Partial<JsonReadOptions>
+  ): GeneratePostsResponse {
+    return new GeneratePostsResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(
+    jsonString: string,
+    options?: Partial<JsonReadOptions>
+  ): GeneratePostsResponse {
+    return new GeneratePostsResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(
+    a: GeneratePostsResponse | PlainMessage<GeneratePostsResponse> | undefined,
+    b: GeneratePostsResponse | PlainMessage<GeneratePostsResponse> | undefined
+  ): boolean {
+    return proto3.util.equals(GeneratePostsResponse, a, b);
+  }
+}
