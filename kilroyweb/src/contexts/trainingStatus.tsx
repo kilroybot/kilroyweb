@@ -29,7 +29,7 @@ export function TrainingStatusProvider({
     const method = client.getTrainingStatus;
     const { result, abort } = request({ method });
     result.then((response) => setTrainingStatus(response.status));
-    return abort;
+    return () => abort.abort();
   }, [client]);
 
   useEffect(() => {
@@ -43,14 +43,14 @@ export function TrainingStatusProvider({
             retriesLeft: 3,
           },
         });
-        abortCallback = abort;
+        abortCallback = () => abort.abort();
         const response = await result;
         setTrainingStatus(response.status);
       }
     };
     fetch().then();
 
-    return abortCallback;
+    return () => abortCallback();
   }, [client, getConnectQueue]);
 
   useEffect(() => {
@@ -64,7 +64,7 @@ export function TrainingStatusProvider({
             retriesLeft: 3,
           },
         });
-        abortCallback = abort;
+        abortCallback = () => abort.abort();
         try {
           const response = await result;
           setTrainingStatus(response.status);
@@ -75,7 +75,7 @@ export function TrainingStatusProvider({
     };
     fetch().then();
 
-    return abortCallback;
+    return () => abortCallback();
   }, [getErrorQueue]);
 
   useEffect(() => {

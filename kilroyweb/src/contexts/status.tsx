@@ -43,7 +43,7 @@ export function StatusProvider({ children }: StatusProviderProps) {
     const method = client.getControllerStatus;
     const { result, abort } = request({ method });
     result.then((response) => setControllerStatus(response.status));
-    return abort;
+    return () => abort.abort();
   }, [client]);
 
   useEffect(() => {
@@ -57,14 +57,14 @@ export function StatusProvider({ children }: StatusProviderProps) {
             retriesLeft: 3,
           },
         });
-        abortCallback = abort;
+        abortCallback = () => abort.abort();
         const response = await result;
         setControllerStatus(response.status);
       }
     };
     fetch().then();
 
-    return abortCallback;
+    return () => abortCallback();
   }, [client, getConnectQueue]);
 
   useEffect(() => {
@@ -78,7 +78,7 @@ export function StatusProvider({ children }: StatusProviderProps) {
             retriesLeft: 3,
           },
         });
-        abortCallback = abort;
+        abortCallback = () => abort.abort();
         try {
           const response = await result;
           setControllerStatus(response.status);
@@ -89,7 +89,7 @@ export function StatusProvider({ children }: StatusProviderProps) {
     };
     fetch().then();
 
-    return abortCallback;
+    return () => abortCallback();
   }, [getErrorQueue]);
 
   useEffect(() => {
@@ -108,7 +108,7 @@ export function StatusProvider({ children }: StatusProviderProps) {
     const method = client.getFaceStatus;
     const { result, abort } = request({ method });
     result.then((response) => setFaceStatus(response.status));
-    return abort;
+    return () => abort.abort();
   }, [client]);
 
   useEffect(() => {
@@ -122,14 +122,14 @@ export function StatusProvider({ children }: StatusProviderProps) {
             retriesLeft: 3,
           },
         });
-        abortCallback = abort;
+        abortCallback = () => abort.abort();
         const response = await result;
         setFaceStatus(response.status);
       }
     };
     fetch().then();
 
-    return abortCallback;
+    return () => abortCallback();
   }, [client, getConnectQueue]);
 
   useEffect(() => {
@@ -143,7 +143,7 @@ export function StatusProvider({ children }: StatusProviderProps) {
             retriesLeft: 3,
           },
         });
-        abortCallback = abort;
+        abortCallback = () => abort.abort();
         try {
           const response = await result;
           setFaceStatus(response.status);
@@ -154,7 +154,7 @@ export function StatusProvider({ children }: StatusProviderProps) {
     };
     fetch().then();
 
-    return abortCallback;
+    return () => abortCallback();
   }, [getErrorQueue]);
 
   useEffect(() => {
@@ -173,7 +173,7 @@ export function StatusProvider({ children }: StatusProviderProps) {
     const method = client.getModuleStatus;
     const { result, abort } = request({ method });
     result.then((response) => setModuleStatus(response.status));
-    return abort;
+    return () => abort.abort();
   }, [client]);
 
   useEffect(() => {
@@ -187,14 +187,14 @@ export function StatusProvider({ children }: StatusProviderProps) {
             retriesLeft: 3,
           },
         });
-        abortCallback = abort;
+        abortCallback = () => abort.abort();
         const response = await result;
         setModuleStatus(response.status);
       }
     };
     fetch().then();
 
-    return abortCallback;
+    return () => abortCallback();
   }, [client, getConnectQueue]);
 
   useEffect(() => {
@@ -208,7 +208,7 @@ export function StatusProvider({ children }: StatusProviderProps) {
             retriesLeft: 3,
           },
         });
-        abortCallback = abort;
+        abortCallback = () => abort.abort();
         try {
           const response = await result;
           setModuleStatus(response.status);
@@ -219,7 +219,7 @@ export function StatusProvider({ children }: StatusProviderProps) {
     };
     fetch().then();
 
-    return abortCallback;
+    return () => abortCallback();
   }, [getErrorQueue]);
 
   useEffect(() => {

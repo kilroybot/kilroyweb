@@ -42,7 +42,7 @@ export function ConfigProvider({ children }: ConfigProviderProps) {
     const method = client.getControllerConfig;
     const { result, abort } = request({ method });
     result.then((response) => setControllerConfig(JSON.parse(response.config)));
-    return abort;
+    return () => abort.abort();
   }, [client]);
 
   useEffect(() => {
@@ -56,7 +56,7 @@ export function ConfigProvider({ children }: ConfigProviderProps) {
             retriesLeft: 3,
           },
         });
-        abortCallback = abort;
+        abortCallback = () => abort.abort();
         const response = await result;
         const config = JSON.parse(response.config);
         setControllerConfig(config);
@@ -64,7 +64,7 @@ export function ConfigProvider({ children }: ConfigProviderProps) {
     };
     fetch().then();
 
-    return abortCallback;
+    return () => abortCallback();
   }, [client, getConnectQueue]);
 
   useEffect(() => {
@@ -84,7 +84,7 @@ export function ConfigProvider({ children }: ConfigProviderProps) {
     const method = client.getFaceConfig;
     const { result, abort } = request({ method });
     result.then((response) => setFaceConfig(JSON.parse(response.config)));
-    return abort;
+    return () => abort.abort();
   }, [client]);
 
   useEffect(() => {
@@ -98,7 +98,7 @@ export function ConfigProvider({ children }: ConfigProviderProps) {
             retriesLeft: 3,
           },
         });
-        abortCallback = abort;
+        abortCallback = () => abort.abort();
         const response = await result;
         const config = JSON.parse(response.config);
         setFaceConfig(config);
@@ -106,7 +106,7 @@ export function ConfigProvider({ children }: ConfigProviderProps) {
     };
     fetch().then();
 
-    return abortCallback;
+    return () => abortCallback();
   }, [client, getConnectQueue]);
 
   useEffect(() => {
@@ -126,7 +126,7 @@ export function ConfigProvider({ children }: ConfigProviderProps) {
     const method = client.getModuleConfig;
     const { result, abort } = request({ method });
     result.then((response) => setModuleConfig(JSON.parse(response.config)));
-    return abort;
+    return () => abort.abort();
   }, [client]);
 
   useEffect(() => {
@@ -140,7 +140,7 @@ export function ConfigProvider({ children }: ConfigProviderProps) {
             retriesLeft: 3,
           },
         });
-        abortCallback = abort;
+        abortCallback = () => abort.abort();
         const response = await result;
         const config = JSON.parse(response.config);
         setModuleConfig(config);
@@ -148,7 +148,7 @@ export function ConfigProvider({ children }: ConfigProviderProps) {
     };
     fetch().then();
 
-    return abortCallback;
+    return () => abortCallback();
   }, [client, getConnectQueue]);
 
   useEffect(() => {

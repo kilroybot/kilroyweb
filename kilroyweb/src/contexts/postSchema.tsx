@@ -26,7 +26,7 @@ export function PostSchemaProvider({ children }: PostSchemaProviderProps) {
 
     result.then((response) => setSchema(JSON.parse(response.schema)));
 
-    return abort;
+    return () => abort.abort();
   }, [client]);
 
   const postSchema = { schema };

@@ -33,7 +33,7 @@ export function ConfigSchemaProvider({ children }: ConfigSchemaProviderProps) {
       setController(schema);
     });
 
-    return abort;
+    return () => abort.abort();
   }, [client]);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export function ConfigSchemaProvider({ children }: ConfigSchemaProviderProps) {
       setFace(schema);
     });
 
-    return abort;
+    return () => abort.abort();
   }, [client]);
 
   useEffect(() => {
@@ -57,7 +57,7 @@ export function ConfigSchemaProvider({ children }: ConfigSchemaProviderProps) {
       setModule(schema);
     });
 
-    return abort;
+    return () => abort.abort();
   }, [client]);
 
   const configSchema = {

@@ -29,7 +29,7 @@ export function FeedProvider({ children }: FeedProviderProps) {
     const method = client.getFeed;
     const { result, abort } = request({ method });
     result.then((response) => setPosts(response.posts));
-    return abort;
+    return () => abort.abort();
   }, [client]);
 
   useEffect(() => {
@@ -43,14 +43,14 @@ export function FeedProvider({ children }: FeedProviderProps) {
             retriesLeft: 3,
           },
         });
-        abortCallback = abort;
+        abortCallback = () => abort.abort();
         const response = await result;
         setPosts(response.posts);
       }
     };
     fetch().then();
 
-    return abortCallback;
+    return () => abortCallback();
   }, [client, getConnectQueue]);
 
   useEffect(() => {

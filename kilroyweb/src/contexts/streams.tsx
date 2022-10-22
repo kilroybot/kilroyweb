@@ -75,7 +75,7 @@ export function StreamsProvider({ children }: StreamsProviderProps) {
     };
     fetchStreams().then();
 
-    return abort;
+    return () => abort.abort();
   }, []);
 
   const getErrorQueue = useCallback(() => {

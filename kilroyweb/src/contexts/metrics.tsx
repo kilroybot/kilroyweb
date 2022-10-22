@@ -35,14 +35,14 @@ export function RawMetricsProvider({ children }: RawMetricsProviderProps) {
     const method = client.getModuleMetricsConfig;
     const { result, abort } = request({ method });
     result.then((response) => setConfigs(response.configs));
-    return abort;
+    return () => abort.abort();
   }, [client]);
 
   useEffect(() => {
     const method = client.getModuleMetrics;
     const { result, abort } = request({ method });
     result.then((response) => setData(response.metrics));
-    return abort;
+    return () => abort.abort();
   }, [client]);
 
   useEffect(() => {
@@ -56,14 +56,14 @@ export function RawMetricsProvider({ children }: RawMetricsProviderProps) {
             retriesLeft: 3,
           },
         });
-        abortCallback = abort;
+        abortCallback = () => abort.abort();
         const response = await result;
         setData(response.metrics);
       }
     };
     fetch().then();
 
-    return abortCallback;
+    return () => abortCallback();
   }, [client, getConnectQueue]);
 
   useEffect(() => {
