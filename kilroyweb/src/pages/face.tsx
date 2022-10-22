@@ -76,7 +76,13 @@ export default function Face() {
           controllerStatus !== Status.UNSPECIFIED ? (
             <>
               <Title order={4}>{labels.face.dangerZone.title}</Title>
-              <Button onClick={handleReset}>
+              <Button
+                onClick={handleReset}
+                loading={
+                  faceStatus !== Status.READY ||
+                  controllerStatus !== Status.READY
+                }
+              >
                 {labels.face.dangerZone.buttons.reset}
               </Button>
             </>

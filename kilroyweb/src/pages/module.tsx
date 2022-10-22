@@ -76,7 +76,13 @@ export default function Module() {
           controllerStatus !== Status.UNSPECIFIED ? (
             <>
               <Title order={4}>{labels.module.dangerZone.title}</Title>
-              <Button onClick={handleReset}>
+              <Button
+                onClick={handleReset}
+                loading={
+                  moduleStatus !== Status.READY ||
+                  controllerStatus !== Status.READY
+                }
+              >
                 {labels.module.dangerZone.buttons.reset}
               </Button>
             </>
