@@ -30,7 +30,7 @@ export default function Face() {
           retryOptions: { retriesLeft: 3 },
         });
         await result;
-        return abort;
+        return () => abort.abort();
       }
     },
     [client, config]
@@ -43,7 +43,7 @@ export default function Face() {
       retryOptions: { retriesLeft: 3 },
     });
     await result;
-    return abort;
+    return () => abort.abort();
   }, [client]);
 
   return (

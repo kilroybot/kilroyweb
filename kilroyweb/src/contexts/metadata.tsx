@@ -38,7 +38,7 @@ export function MetadataProvider({ children }: MetadataProviderProps) {
       });
     });
 
-    return abort;
+    return () => abort.abort();
   }, [client]);
 
   useEffect(() => {
@@ -52,7 +52,7 @@ export function MetadataProvider({ children }: MetadataProviderProps) {
       });
     });
 
-    return abort;
+    return () => abort.abort();
   }, [client]);
 
   const metadata = {

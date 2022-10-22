@@ -39,7 +39,7 @@ export function request<I extends Message, O>({
     ...retryOptions,
   });
 
-  return { result: result, abort: abort.abort };
+  return { result: result, abort: abort };
 }
 
 export type StreamOptions<I extends Message, O> = {
@@ -67,5 +67,5 @@ export function stream<I extends Message, O>({
     ...reconnectOptions,
   });
 
-  return { result: result, abort: abort.abort };
+  return { result: result, abort: abort };
 }
