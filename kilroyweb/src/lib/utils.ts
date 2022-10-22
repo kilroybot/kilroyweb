@@ -133,6 +133,7 @@ export type ReconnectOptions<T = any> = {
   onRetry?: (error: any) => void;
   onConnect?: () => void;
   ignoreError?: (error: any) => boolean;
+  infinite?: boolean;
 };
 
 export async function* reconnect<T = any>({
@@ -145,6 +146,7 @@ export async function* reconnect<T = any>({
   onError,
   onConnect,
   ignoreError,
+  infinite = true,
 }: ReconnectOptions<T>): AsyncIterable<T> {
   const originalRetriesLeft = retriesLeft;
   const originalDelay = delay;
@@ -157,6 +159,7 @@ export async function* reconnect<T = any>({
       for await (const item of fn()) {
         yield item;
       }
+      if (!infinite) return;
       retriesLeft = originalRetriesLeft;
       delay = originalDelay;
     } catch (err) {
