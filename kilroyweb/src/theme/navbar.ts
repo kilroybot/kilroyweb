@@ -1,8 +1,10 @@
 import {
   IconChartLine,
   IconCpu,
+  IconFlask2,
   IconMessage,
   IconMoodSmile,
+  IconPlayCard,
   IconRobot,
 } from "@tabler/icons";
 import { Icon } from "../lib/types";
@@ -66,6 +68,12 @@ export const pages: { [key: string]: PageData } = {
     label: "Feed",
     path: "/feed",
     icon: IconMessage,
+    strokeWidth: defaults.strokeWidth,
+  },
+  playground: {
+    label: "Playground",
+    path: "/playground",
+    icon: IconFlask2,
     strokeWidth: defaults.strokeWidth,
   },
 };
