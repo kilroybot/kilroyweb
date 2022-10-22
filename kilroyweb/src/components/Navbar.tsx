@@ -3,10 +3,12 @@ import {
   createStyles,
   Navbar as MantineNavbar,
   NavbarProps as MantineNavbarProps,
+  Space,
   Stack,
   Tooltip,
   UnstyledButton,
   useMantineColorScheme,
+  useMantineTheme,
 } from "@mantine/core";
 import { defaults, Page, PageData, pages } from "../theme/navbar";
 import Link from "./Link";
@@ -109,6 +111,8 @@ export default function Navbar({
 }: NavbarProps) {
   const { home: homePage, ...otherPages } = pages;
 
+  const theme = useMantineTheme();
+
   const links = Object.keys(otherPages).map((key) => (
     <NavbarLink key={key} page={pages[key]} active={key === page} />
   ));
@@ -122,11 +126,13 @@ export default function Navbar({
           </Stack>
         </Center>
       </MantineNavbar.Section>
+      <Space h={theme.spacing.xs / 4} />
       <MantineNavbar.Section grow>
         <Center style={{ height: "100%" }}>
-          <Stack spacing={0}>{links}</Stack>
+          <Stack spacing={theme.spacing.xs / 4}>{links}</Stack>
         </Center>
       </MantineNavbar.Section>
+      <Space h={theme.spacing.xs / 4} />
       <MantineNavbar.Section>
         <Center style={{ height: "100%" }}>
           <Stack spacing={0}>
