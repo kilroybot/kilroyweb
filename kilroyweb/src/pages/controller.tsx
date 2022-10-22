@@ -72,7 +72,7 @@ export default function Controller() {
           {status !== Status.UNSPECIFIED ? (
             <>
               <Title order={4}>{labels.controller.dangerZone.title}</Title>
-              <Button onClick={handleReset}>
+              <Button onClick={handleReset} loading={status !== Status.READY}>
                 {labels.controller.dangerZone.buttons.reset}
               </Button>
             </>
