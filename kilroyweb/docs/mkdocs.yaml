@@ -38,8 +38,7 @@ theme:
 
 # enable useful extensions
 markdown_extensions:
-  - toc:
-      # symbol next to headers
+  - toc: # symbol next to headers
       permalink: 🔗
       slugify: !!python/name:pymdownx.slugs.uslugify
   - pymdownx.highlight
@@ -61,16 +60,13 @@ markdown_extensions:
   - pymdownx.tasklist:
       custom_checkbox: true
 
-plugins:
-  # enable search
+plugins: # enable search
   - search
 
-extra:
-  # footer social icons
+extra: # footer social icons
   social:
     - icon: material/github
       link: https://github.com/kilroybot/kilroyweb
 
 nav:
   - Home: index.md
-  - Usage: usage.md
