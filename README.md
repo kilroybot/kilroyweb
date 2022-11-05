@@ -13,8 +13,9 @@ kilroy web ui 📉
 
 This `README` provides info about the development process.
 
-For more info about `kilroyweb` itself see `kilroyweb/README.md`
-or [docs](https://kilroybot.github.io/kilroyweb).
+For more info about `kilroyweb` itself see
+[package `README`](kilroyweb/README.md) or
+[docs](https://kilroybot.github.io/kilroyweb).
 
 ## Quickstart
 
