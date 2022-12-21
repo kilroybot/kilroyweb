@@ -40,7 +40,7 @@ export function objectDiff(a: object, b: object): object | null {
   const result = {};
   each(a, (v, k) => {
     if (b[k] === v) return;
-    if (!isPlainObject(v)) {
+    if (!isPlainObject(v) || !isPlainObject(b[k])) {
       result[k] = v;
       return;
     }
@@ -55,16 +55,30 @@ export function getInputProperties<T = any, F = any>(
   defaultType?: string,
   options?: UIOptionsType<T, F>
 ): InputPropsType {
-  const type =
+  const schemaType =
     Array.isArray(schema.type) &&
     schema.type.length === 2 &&
     schema.type.includes("null")
       ? schema.type.find((t) => t !== "null")
       : schema.type;
 
-  const modifiedSchema = { ...schema, type };
+  const modifiedSchema = { ...schema, type: schemaType };
 
-  return getInputProps(modifiedSchema, defaultType, options);
+  const { type, ...otherProps } = getInputProps(
+    modifiedSchema,
+    defaultType,
+    options
+  );
+
+  const outType = (() => {
+    if (schema.type === "string" && schema.format === "time") return "time";
+    return type;
+  })();
+
+  return {
+    ...otherProps,
+    type: outType,
+  };
 }
 
 export function enumToArray(enumObj) {

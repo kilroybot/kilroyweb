@@ -4,7 +4,6 @@ import {
   IconFlask2,
   IconMessage,
   IconMoodSmile,
-  IconPlayCard,
   IconRobot,
 } from "@tabler/icons";
 import { Icon } from "../lib/types";

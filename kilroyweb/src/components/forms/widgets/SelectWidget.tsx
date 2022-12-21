@@ -1,7 +1,16 @@
-import { WidgetProps } from "@rjsf/utils";
+import {
+  FormContextType,
+  RJSFSchema,
+  StrictRJSFSchema,
+  WidgetProps,
+} from "@rjsf/utils";
 import { MultiSelect, Select } from "@mantine/core";
 
-export type SelectWidgetProps<T = any, F = any> = WidgetProps<T, F>;
+export type SelectWidgetProps<
+  T = any,
+  S extends StrictRJSFSchema = RJSFSchema,
+  F extends FormContextType = any
+> = WidgetProps<T, S, F>;
 
 export default function SelectWidget({
   id,

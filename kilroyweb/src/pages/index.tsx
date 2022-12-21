@@ -15,7 +15,7 @@ export default function Index() {
   return (
     <>
       <Head>
-        <title>{labels.index.title}</title>
+        <title>{labels.pages.index.title}</title>
       </Head>
       <PageLayout page="home">
         <SimpleGrid

@@ -9,20 +9,29 @@ import type {
 import { Message, proto3, protoInt64 } from "@bufbuild/protobuf";
 
 /**
+ *
+ * Possible service statuses.
+ *
  * @generated from enum kilroy.cilroy.v1alpha.Status
  */
 export enum Status {
   /**
+   * Unspecified status.
+   *
    * @generated from enum value: STATUS_UNSPECIFIED = 0;
    */
   UNSPECIFIED = 0,
 
   /**
+   * The service is loading.
+   *
    * @generated from enum value: STATUS_LOADING = 1;
    */
   LOADING = 1,
 
   /**
+   * The service is ready.
+   *
    * @generated from enum value: STATUS_READY = 2;
    */
   READY = 2,
@@ -36,25 +45,36 @@ proto3.util.setEnumType(Status, "kilroy.cilroy.v1alpha.Status", [
 ]);
 
 /**
+ *
+ * Possible training statuses.
+ *
  * @generated from enum kilroy.cilroy.v1alpha.TrainingStatus
  */
 export enum TrainingStatus {
   /**
+   * Unspecified training status.
+   *
    * @generated from enum value: TRAINING_STATUS_UNSPECIFIED = 0;
    */
   UNSPECIFIED = 0,
 
   /**
+   * The training is idle.
+   *
    * @generated from enum value: TRAINING_STATUS_IDLE = 1;
    */
   IDLE = 1,
 
   /**
+   * The training is in offline mode.
+   *
    * @generated from enum value: TRAINING_STATUS_OFFLINE = 2;
    */
   OFFLINE = 2,
 
   /**
+   * The training is in online mode.
+   *
    * @generated from enum value: TRAINING_STATUS_ONLINE = 3;
    */
   ONLINE = 3,
@@ -73,6 +93,9 @@ proto3.util.setEnumType(
 );
 
 /**
+ *
+ * Request for GetFaceMetadata.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetFaceMetadataRequest
  */
 export class GetFaceMetadataRequest extends Message<GetFaceMetadataRequest> {
@@ -118,6 +141,9 @@ export class GetFaceMetadataRequest extends Message<GetFaceMetadataRequest> {
 }
 
 /**
+ *
+ * Response from GetFaceMetadata.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetFaceMetadataResponse
  */
 export class GetFaceMetadataResponse extends Message<GetFaceMetadataResponse> {
@@ -133,10 +159,14 @@ export class GetFaceMetadataResponse extends Message<GetFaceMetadataResponse> {
     },
   ]);
   /**
+   * The key of the face.
+   *
    * @generated from field: string key = 1;
    */
   key = "";
   /**
+   * The description of the face.
+   *
    * @generated from field: string description = 2;
    */
   description = "";
@@ -182,6 +212,9 @@ export class GetFaceMetadataResponse extends Message<GetFaceMetadataResponse> {
 }
 
 /**
+ *
+ * Request for GetModuleMetadata.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetModuleMetadataRequest
  */
 export class GetModuleMetadataRequest extends Message<GetModuleMetadataRequest> {
@@ -230,6 +263,9 @@ export class GetModuleMetadataRequest extends Message<GetModuleMetadataRequest> 
 }
 
 /**
+ *
+ * Response from GetModuleMetadata.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetModuleMetadataResponse
  */
 export class GetModuleMetadataResponse extends Message<GetModuleMetadataResponse> {
@@ -245,10 +281,14 @@ export class GetModuleMetadataResponse extends Message<GetModuleMetadataResponse
     },
   ]);
   /**
+   * The key of the module.
+   *
    * @generated from field: string key = 1;
    */
   key = "";
   /**
+   * The description of the module.
+   *
    * @generated from field: string description = 2;
    */
   description = "";
@@ -294,6 +334,9 @@ export class GetModuleMetadataResponse extends Message<GetModuleMetadataResponse
 }
 
 /**
+ *
+ * Request for GetFacePostSchema.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetFacePostSchemaRequest
  */
 export class GetFacePostSchemaRequest extends Message<GetFacePostSchemaRequest> {
@@ -342,6 +385,9 @@ export class GetFacePostSchemaRequest extends Message<GetFacePostSchemaRequest> 
 }
 
 /**
+ *
+ * Response from GetFacePostSchema.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetFacePostSchemaResponse
  */
 export class GetFacePostSchemaResponse extends Message<GetFacePostSchemaResponse> {
@@ -351,6 +397,8 @@ export class GetFacePostSchemaResponse extends Message<GetFacePostSchemaResponse
     { no: 1, name: "schema", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
   /**
+   * The schema of a post as a JSON string.
+   *
    * @generated from field: string schema = 1;
    */
   schema = "";
@@ -396,6 +444,9 @@ export class GetFacePostSchemaResponse extends Message<GetFacePostSchemaResponse
 }
 
 /**
+ *
+ * Request for GetModulePostSchema.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetModulePostSchemaRequest
  */
 export class GetModulePostSchemaRequest extends Message<GetModulePostSchemaRequest> {
@@ -444,6 +495,9 @@ export class GetModulePostSchemaRequest extends Message<GetModulePostSchemaReque
 }
 
 /**
+ *
+ * Response from GetModulePostSchema.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetModulePostSchemaResponse
  */
 export class GetModulePostSchemaResponse extends Message<GetModulePostSchemaResponse> {
@@ -454,6 +508,8 @@ export class GetModulePostSchemaResponse extends Message<GetModulePostSchemaResp
     { no: 1, name: "schema", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
   /**
+   * The schema of a post as a JSON string.
+   *
    * @generated from field: string schema = 1;
    */
   schema = "";
@@ -502,6 +558,9 @@ export class GetModulePostSchemaResponse extends Message<GetModulePostSchemaResp
 }
 
 /**
+ *
+ * Request for GetControllerStatus.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetControllerStatusRequest
  */
 export class GetControllerStatusRequest extends Message<GetControllerStatusRequest> {
@@ -550,6 +609,9 @@ export class GetControllerStatusRequest extends Message<GetControllerStatusReque
 }
 
 /**
+ *
+ * Response from GetControllerStatus.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetControllerStatusResponse
  */
 export class GetControllerStatusResponse extends Message<GetControllerStatusResponse> {
@@ -560,6 +622,8 @@ export class GetControllerStatusResponse extends Message<GetControllerStatusResp
     { no: 1, name: "status", kind: "enum", T: proto3.getEnumType(Status) },
   ]);
   /**
+   * The status of the controller.
+   *
    * @generated from field: kilroy.cilroy.v1alpha.Status status = 1;
    */
   status = Status.UNSPECIFIED;
@@ -608,6 +672,9 @@ export class GetControllerStatusResponse extends Message<GetControllerStatusResp
 }
 
 /**
+ *
+ * Request for WatchControllerStatus.
+ *
  * @generated from message kilroy.cilroy.v1alpha.WatchControllerStatusRequest
  */
 export class WatchControllerStatusRequest extends Message<WatchControllerStatusRequest> {
@@ -660,6 +727,9 @@ export class WatchControllerStatusRequest extends Message<WatchControllerStatusR
 }
 
 /**
+ *
+ * Response from WatchControllerStatus.
+ *
  * @generated from message kilroy.cilroy.v1alpha.WatchControllerStatusResponse
  */
 export class WatchControllerStatusResponse extends Message<WatchControllerStatusResponse> {
@@ -670,6 +740,8 @@ export class WatchControllerStatusResponse extends Message<WatchControllerStatus
     { no: 1, name: "status", kind: "enum", T: proto3.getEnumType(Status) },
   ]);
   /**
+   * The status of the controller.
+   *
    * @generated from field: kilroy.cilroy.v1alpha.Status status = 1;
    */
   status = Status.UNSPECIFIED;
@@ -718,6 +790,9 @@ export class WatchControllerStatusResponse extends Message<WatchControllerStatus
 }
 
 /**
+ *
+ * Request for GetFaceStatus.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetFaceStatusRequest
  */
 export class GetFaceStatusRequest extends Message<GetFaceStatusRequest> {
@@ -760,6 +835,9 @@ export class GetFaceStatusRequest extends Message<GetFaceStatusRequest> {
 }
 
 /**
+ *
+ * Response from GetFaceStatus.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetFaceStatusResponse
  */
 export class GetFaceStatusResponse extends Message<GetFaceStatusResponse> {
@@ -769,6 +847,8 @@ export class GetFaceStatusResponse extends Message<GetFaceStatusResponse> {
     { no: 1, name: "status", kind: "enum", T: proto3.getEnumType(Status) },
   ]);
   /**
+   * The status of the face.
+   *
    * @generated from field: kilroy.cilroy.v1alpha.Status status = 1;
    */
   status = Status.UNSPECIFIED;
@@ -808,6 +888,9 @@ export class GetFaceStatusResponse extends Message<GetFaceStatusResponse> {
 }
 
 /**
+ *
+ * Request for WatchFaceStatus.
+ *
  * @generated from message kilroy.cilroy.v1alpha.WatchFaceStatusRequest
  */
 export class WatchFaceStatusRequest extends Message<WatchFaceStatusRequest> {
@@ -853,6 +936,9 @@ export class WatchFaceStatusRequest extends Message<WatchFaceStatusRequest> {
 }
 
 /**
+ *
+ * Response from WatchFaceStatus.
+ *
  * @generated from message kilroy.cilroy.v1alpha.WatchFaceStatusResponse
  */
 export class WatchFaceStatusResponse extends Message<WatchFaceStatusResponse> {
@@ -862,6 +948,8 @@ export class WatchFaceStatusResponse extends Message<WatchFaceStatusResponse> {
     { no: 1, name: "status", kind: "enum", T: proto3.getEnumType(Status) },
   ]);
   /**
+   * The status of the face.
+   *
    * @generated from field: kilroy.cilroy.v1alpha.Status status = 1;
    */
   status = Status.UNSPECIFIED;
@@ -907,6 +995,9 @@ export class WatchFaceStatusResponse extends Message<WatchFaceStatusResponse> {
 }
 
 /**
+ *
+ * Request for GetModuleStatus.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetModuleStatusRequest
  */
 export class GetModuleStatusRequest extends Message<GetModuleStatusRequest> {
@@ -952,6 +1043,9 @@ export class GetModuleStatusRequest extends Message<GetModuleStatusRequest> {
 }
 
 /**
+ *
+ * Response from GetModuleStatus.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetModuleStatusResponse
  */
 export class GetModuleStatusResponse extends Message<GetModuleStatusResponse> {
@@ -961,6 +1055,8 @@ export class GetModuleStatusResponse extends Message<GetModuleStatusResponse> {
     { no: 1, name: "status", kind: "enum", T: proto3.getEnumType(Status) },
   ]);
   /**
+   * The status of the module.
+   *
    * @generated from field: kilroy.cilroy.v1alpha.Status status = 1;
    */
   status = Status.UNSPECIFIED;
@@ -1006,6 +1102,9 @@ export class GetModuleStatusResponse extends Message<GetModuleStatusResponse> {
 }
 
 /**
+ *
+ * Request for WatchModuleStatus.
+ *
  * @generated from message kilroy.cilroy.v1alpha.WatchModuleStatusRequest
  */
 export class WatchModuleStatusRequest extends Message<WatchModuleStatusRequest> {
@@ -1054,6 +1153,9 @@ export class WatchModuleStatusRequest extends Message<WatchModuleStatusRequest> 
 }
 
 /**
+ *
+ * Response from WatchModuleStatus.
+ *
  * @generated from message kilroy.cilroy.v1alpha.WatchModuleStatusResponse
  */
 export class WatchModuleStatusResponse extends Message<WatchModuleStatusResponse> {
@@ -1063,6 +1165,8 @@ export class WatchModuleStatusResponse extends Message<WatchModuleStatusResponse
     { no: 1, name: "status", kind: "enum", T: proto3.getEnumType(Status) },
   ]);
   /**
+   * The status of the module.
+   *
    * @generated from field: kilroy.cilroy.v1alpha.Status status = 1;
    */
   status = Status.UNSPECIFIED;
@@ -1108,6 +1212,9 @@ export class WatchModuleStatusResponse extends Message<WatchModuleStatusResponse
 }
 
 /**
+ *
+ * Request for GetTrainingStatus.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetTrainingStatusRequest
  */
 export class GetTrainingStatusRequest extends Message<GetTrainingStatusRequest> {
@@ -1156,6 +1263,9 @@ export class GetTrainingStatusRequest extends Message<GetTrainingStatusRequest> 
 }
 
 /**
+ *
+ * Response from GetTrainingStatus.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetTrainingStatusResponse
  */
 export class GetTrainingStatusResponse extends Message<GetTrainingStatusResponse> {
@@ -1170,6 +1280,8 @@ export class GetTrainingStatusResponse extends Message<GetTrainingStatusResponse
     },
   ]);
   /**
+   * The training status.
+   *
    * @generated from field: kilroy.cilroy.v1alpha.TrainingStatus status = 1;
    */
   status = TrainingStatus.UNSPECIFIED;
@@ -1215,6 +1327,9 @@ export class GetTrainingStatusResponse extends Message<GetTrainingStatusResponse
 }
 
 /**
+ *
+ * Request for WatchTrainingStatus.
+ *
  * @generated from message kilroy.cilroy.v1alpha.WatchTrainingStatusRequest
  */
 export class WatchTrainingStatusRequest extends Message<WatchTrainingStatusRequest> {
@@ -1263,6 +1378,9 @@ export class WatchTrainingStatusRequest extends Message<WatchTrainingStatusReque
 }
 
 /**
+ *
+ * Response from WatchTrainingStatus.
+ *
  * @generated from message kilroy.cilroy.v1alpha.WatchTrainingStatusResponse
  */
 export class WatchTrainingStatusResponse extends Message<WatchTrainingStatusResponse> {
@@ -1278,6 +1396,8 @@ export class WatchTrainingStatusResponse extends Message<WatchTrainingStatusResp
     },
   ]);
   /**
+   * The training status.
+   *
    * @generated from field: kilroy.cilroy.v1alpha.TrainingStatus status = 1;
    */
   status = TrainingStatus.UNSPECIFIED;
@@ -1326,6 +1446,9 @@ export class WatchTrainingStatusResponse extends Message<WatchTrainingStatusResp
 }
 
 /**
+ *
+ * Request for GetControllerConfigSchema.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetControllerConfigSchemaRequest
  */
 export class GetControllerConfigSchemaRequest extends Message<GetControllerConfigSchemaRequest> {
@@ -1378,6 +1501,9 @@ export class GetControllerConfigSchemaRequest extends Message<GetControllerConfi
 }
 
 /**
+ *
+ * Response from GetControllerConfigSchema.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetControllerConfigSchemaResponse
  */
 export class GetControllerConfigSchemaResponse extends Message<GetControllerConfigSchemaResponse> {
@@ -1388,6 +1514,8 @@ export class GetControllerConfigSchemaResponse extends Message<GetControllerConf
     { no: 1, name: "schema", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
   /**
+   * The schema of the controller config as a JSON string.
+   *
    * @generated from field: string schema = 1;
    */
   schema = "";
@@ -1436,6 +1564,9 @@ export class GetControllerConfigSchemaResponse extends Message<GetControllerConf
 }
 
 /**
+ *
+ * Request for GetControllerConfig.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetControllerConfigRequest
  */
 export class GetControllerConfigRequest extends Message<GetControllerConfigRequest> {
@@ -1484,6 +1615,9 @@ export class GetControllerConfigRequest extends Message<GetControllerConfigReque
 }
 
 /**
+ *
+ * Response from GetControllerConfig.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetControllerConfigResponse
  */
 export class GetControllerConfigResponse extends Message<GetControllerConfigResponse> {
@@ -1494,6 +1628,8 @@ export class GetControllerConfigResponse extends Message<GetControllerConfigResp
     { no: 1, name: "config", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
   /**
+   * The controller config as a JSON string.
+   *
    * @generated from field: string config = 1;
    */
   config = "";
@@ -1542,6 +1678,9 @@ export class GetControllerConfigResponse extends Message<GetControllerConfigResp
 }
 
 /**
+ *
+ * Request for WatchControllerConfig.
+ *
  * @generated from message kilroy.cilroy.v1alpha.WatchControllerConfigRequest
  */
 export class WatchControllerConfigRequest extends Message<WatchControllerConfigRequest> {
@@ -1594,6 +1733,9 @@ export class WatchControllerConfigRequest extends Message<WatchControllerConfigR
 }
 
 /**
+ *
+ * Response from WatchControllerConfig.
+ *
  * @generated from message kilroy.cilroy.v1alpha.WatchControllerConfigResponse
  */
 export class WatchControllerConfigResponse extends Message<WatchControllerConfigResponse> {
@@ -1604,6 +1746,8 @@ export class WatchControllerConfigResponse extends Message<WatchControllerConfig
     { no: 1, name: "config", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
   /**
+   * The controller config as a JSON string.
+   *
    * @generated from field: string config = 1;
    */
   config = "";
@@ -1652,6 +1796,9 @@ export class WatchControllerConfigResponse extends Message<WatchControllerConfig
 }
 
 /**
+ *
+ * Request for SetControllerConfig.
+ *
  * @generated from message kilroy.cilroy.v1alpha.SetControllerConfigRequest
  */
 export class SetControllerConfigRequest extends Message<SetControllerConfigRequest> {
@@ -1661,6 +1808,8 @@ export class SetControllerConfigRequest extends Message<SetControllerConfigReque
     { no: 1, name: "config", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
   /**
+   * The controller config as a JSON string.
+   *
    * @generated from field: string config = 1;
    */
   config = "";
@@ -1706,6 +1855,9 @@ export class SetControllerConfigRequest extends Message<SetControllerConfigReque
 }
 
 /**
+ *
+ * Response from SetControllerConfig.
+ *
  * @generated from message kilroy.cilroy.v1alpha.SetControllerConfigResponse
  */
 export class SetControllerConfigResponse extends Message<SetControllerConfigResponse> {
@@ -1716,6 +1868,8 @@ export class SetControllerConfigResponse extends Message<SetControllerConfigResp
     { no: 1, name: "config", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
   /**
+   * The controller config as a JSON string.
+   *
    * @generated from field: string config = 1;
    */
   config = "";
@@ -1764,6 +1918,9 @@ export class SetControllerConfigResponse extends Message<SetControllerConfigResp
 }
 
 /**
+ *
+ * Request for GetFaceConfigSchema.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetFaceConfigSchemaRequest
  */
 export class GetFaceConfigSchemaRequest extends Message<GetFaceConfigSchemaRequest> {
@@ -1812,6 +1969,9 @@ export class GetFaceConfigSchemaRequest extends Message<GetFaceConfigSchemaReque
 }
 
 /**
+ *
+ * Response from GetFaceConfigSchema.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetFaceConfigSchemaResponse
  */
 export class GetFaceConfigSchemaResponse extends Message<GetFaceConfigSchemaResponse> {
@@ -1822,6 +1982,8 @@ export class GetFaceConfigSchemaResponse extends Message<GetFaceConfigSchemaResp
     { no: 1, name: "schema", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
   /**
+   * The schema of the face config as a JSON string.
+   *
    * @generated from field: string schema = 1;
    */
   schema = "";
@@ -1870,6 +2032,9 @@ export class GetFaceConfigSchemaResponse extends Message<GetFaceConfigSchemaResp
 }
 
 /**
+ *
+ * Request for GetFaceConfig.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetFaceConfigRequest
  */
 export class GetFaceConfigRequest extends Message<GetFaceConfigRequest> {
@@ -1912,6 +2077,9 @@ export class GetFaceConfigRequest extends Message<GetFaceConfigRequest> {
 }
 
 /**
+ *
+ * Response from GetFaceConfig.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetFaceConfigResponse
  */
 export class GetFaceConfigResponse extends Message<GetFaceConfigResponse> {
@@ -1921,6 +2089,8 @@ export class GetFaceConfigResponse extends Message<GetFaceConfigResponse> {
     { no: 1, name: "config", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
   /**
+   * The face config as a JSON string.
+   *
    * @generated from field: string config = 1;
    */
   config = "";
@@ -1960,6 +2130,9 @@ export class GetFaceConfigResponse extends Message<GetFaceConfigResponse> {
 }
 
 /**
+ *
+ * Request for WatchFaceConfig.
+ *
  * @generated from message kilroy.cilroy.v1alpha.WatchFaceConfigRequest
  */
 export class WatchFaceConfigRequest extends Message<WatchFaceConfigRequest> {
@@ -2005,6 +2178,9 @@ export class WatchFaceConfigRequest extends Message<WatchFaceConfigRequest> {
 }
 
 /**
+ *
+ * Response from WatchFaceConfig.
+ *
  * @generated from message kilroy.cilroy.v1alpha.WatchFaceConfigResponse
  */
 export class WatchFaceConfigResponse extends Message<WatchFaceConfigResponse> {
@@ -2014,6 +2190,8 @@ export class WatchFaceConfigResponse extends Message<WatchFaceConfigResponse> {
     { no: 1, name: "config", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
   /**
+   * The face config as a JSON string.
+   *
    * @generated from field: string config = 1;
    */
   config = "";
@@ -2059,6 +2237,9 @@ export class WatchFaceConfigResponse extends Message<WatchFaceConfigResponse> {
 }
 
 /**
+ *
+ * Request for SetFaceConfig.
+ *
  * @generated from message kilroy.cilroy.v1alpha.SetFaceConfigRequest
  */
 export class SetFaceConfigRequest extends Message<SetFaceConfigRequest> {
@@ -2068,6 +2249,8 @@ export class SetFaceConfigRequest extends Message<SetFaceConfigRequest> {
     { no: 1, name: "config", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
   /**
+   * The face config as a JSON string.
+   *
    * @generated from field: string config = 1;
    */
   config = "";
@@ -2107,6 +2290,9 @@ export class SetFaceConfigRequest extends Message<SetFaceConfigRequest> {
 }
 
 /**
+ *
+ * Response from SetFaceConfig.
+ *
  * @generated from message kilroy.cilroy.v1alpha.SetFaceConfigResponse
  */
 export class SetFaceConfigResponse extends Message<SetFaceConfigResponse> {
@@ -2116,6 +2302,8 @@ export class SetFaceConfigResponse extends Message<SetFaceConfigResponse> {
     { no: 1, name: "config", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
   /**
+   * The face config as a JSON string.
+   *
    * @generated from field: string config = 1;
    */
   config = "";
@@ -2155,6 +2343,9 @@ export class SetFaceConfigResponse extends Message<SetFaceConfigResponse> {
 }
 
 /**
+ *
+ * Request for GetModuleConfigSchema.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetModuleConfigSchemaRequest
  */
 export class GetModuleConfigSchemaRequest extends Message<GetModuleConfigSchemaRequest> {
@@ -2207,6 +2398,9 @@ export class GetModuleConfigSchemaRequest extends Message<GetModuleConfigSchemaR
 }
 
 /**
+ *
+ * Response from GetModuleConfigSchema.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetModuleConfigSchemaResponse
  */
 export class GetModuleConfigSchemaResponse extends Message<GetModuleConfigSchemaResponse> {
@@ -2217,6 +2411,8 @@ export class GetModuleConfigSchemaResponse extends Message<GetModuleConfigSchema
     { no: 1, name: "schema", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
   /**
+   * The schema of the module config as a JSON string.
+   *
    * @generated from field: string schema = 1;
    */
   schema = "";
@@ -2265,6 +2461,9 @@ export class GetModuleConfigSchemaResponse extends Message<GetModuleConfigSchema
 }
 
 /**
+ *
+ * Request for GetModuleConfig.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetModuleConfigRequest
  */
 export class GetModuleConfigRequest extends Message<GetModuleConfigRequest> {
@@ -2310,6 +2509,9 @@ export class GetModuleConfigRequest extends Message<GetModuleConfigRequest> {
 }
 
 /**
+ *
+ * Response from GetModuleConfig.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetModuleConfigResponse
  */
 export class GetModuleConfigResponse extends Message<GetModuleConfigResponse> {
@@ -2319,6 +2521,8 @@ export class GetModuleConfigResponse extends Message<GetModuleConfigResponse> {
     { no: 1, name: "config", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
   /**
+   * The module config as a JSON string.
+   *
    * @generated from field: string config = 1;
    */
   config = "";
@@ -2364,6 +2568,9 @@ export class GetModuleConfigResponse extends Message<GetModuleConfigResponse> {
 }
 
 /**
+ *
+ * Request for WatchModuleConfig.
+ *
  * @generated from message kilroy.cilroy.v1alpha.WatchModuleConfigRequest
  */
 export class WatchModuleConfigRequest extends Message<WatchModuleConfigRequest> {
@@ -2412,6 +2619,9 @@ export class WatchModuleConfigRequest extends Message<WatchModuleConfigRequest> 
 }
 
 /**
+ *
+ * Response from WatchModuleConfig.
+ *
  * @generated from message kilroy.cilroy.v1alpha.WatchModuleConfigResponse
  */
 export class WatchModuleConfigResponse extends Message<WatchModuleConfigResponse> {
@@ -2421,6 +2631,8 @@ export class WatchModuleConfigResponse extends Message<WatchModuleConfigResponse
     { no: 1, name: "config", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
   /**
+   * The module config as a JSON string.
+   *
    * @generated from field: string config = 1;
    */
   config = "";
@@ -2466,6 +2678,9 @@ export class WatchModuleConfigResponse extends Message<WatchModuleConfigResponse
 }
 
 /**
+ *
+ * Request for SetModuleConfig.
+ *
  * @generated from message kilroy.cilroy.v1alpha.SetModuleConfigRequest
  */
 export class SetModuleConfigRequest extends Message<SetModuleConfigRequest> {
@@ -2475,6 +2690,8 @@ export class SetModuleConfigRequest extends Message<SetModuleConfigRequest> {
     { no: 1, name: "config", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
   /**
+   * The module config as a JSON string.
+   *
    * @generated from field: string config = 1;
    */
   config = "";
@@ -2517,6 +2734,9 @@ export class SetModuleConfigRequest extends Message<SetModuleConfigRequest> {
 }
 
 /**
+ *
+ * Response from SetModuleConfig.
+ *
  * @generated from message kilroy.cilroy.v1alpha.SetModuleConfigResponse
  */
 export class SetModuleConfigResponse extends Message<SetModuleConfigResponse> {
@@ -2526,6 +2746,8 @@ export class SetModuleConfigResponse extends Message<SetModuleConfigResponse> {
     { no: 1, name: "config", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
   /**
+   * The module config as a JSON string.
+   *
    * @generated from field: string config = 1;
    */
   config = "";
@@ -2571,6 +2793,9 @@ export class SetModuleConfigResponse extends Message<SetModuleConfigResponse> {
 }
 
 /**
+ *
+ * Request for TrainOffline.
+ *
  * @generated from message kilroy.cilroy.v1alpha.TrainOfflineRequest
  */
 export class TrainOfflineRequest extends Message<TrainOfflineRequest> {
@@ -2613,6 +2838,9 @@ export class TrainOfflineRequest extends Message<TrainOfflineRequest> {
 }
 
 /**
+ *
+ * Response from TrainOffline.
+ *
  * @generated from message kilroy.cilroy.v1alpha.TrainOfflineResponse
  */
 export class TrainOfflineResponse extends Message<TrainOfflineResponse> {
@@ -2655,6 +2883,9 @@ export class TrainOfflineResponse extends Message<TrainOfflineResponse> {
 }
 
 /**
+ *
+ * Request for TrainOnline.
+ *
  * @generated from message kilroy.cilroy.v1alpha.TrainOnlineRequest
  */
 export class TrainOnlineRequest extends Message<TrainOnlineRequest> {
@@ -2697,6 +2928,9 @@ export class TrainOnlineRequest extends Message<TrainOnlineRequest> {
 }
 
 /**
+ *
+ * Response from TrainOnline.
+ *
  * @generated from message kilroy.cilroy.v1alpha.TrainOnlineResponse
  */
 export class TrainOnlineResponse extends Message<TrainOnlineResponse> {
@@ -2739,6 +2973,9 @@ export class TrainOnlineResponse extends Message<TrainOnlineResponse> {
 }
 
 /**
+ *
+ * Request for StopTraining.
+ *
  * @generated from message kilroy.cilroy.v1alpha.StopTrainingRequest
  */
 export class StopTrainingRequest extends Message<StopTrainingRequest> {
@@ -2781,6 +3018,9 @@ export class StopTrainingRequest extends Message<StopTrainingRequest> {
 }
 
 /**
+ *
+ * Response from StopTraining.
+ *
  * @generated from message kilroy.cilroy.v1alpha.StopTrainingResponse
  */
 export class StopTrainingResponse extends Message<StopTrainingResponse> {
@@ -2823,38 +3063,59 @@ export class StopTrainingResponse extends Message<StopTrainingResponse> {
 }
 
 /**
+ *
+ * Metric configuration data.
+ *
  * @generated from message kilroy.cilroy.v1alpha.MetricConfig
  */
 export class MetricConfig extends Message<MetricConfig> {
-  static readonly runtime = proto3;
-  static readonly typeName = "kilroy.cilroy.v1alpha.MetricConfig";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "label", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "group", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "config", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ]);
   /**
+   * The ID of the metric.
+   *
    * @generated from field: string id = 1;
    */
   id = "";
+
   /**
+   * The label of the metric.
+   *
    * @generated from field: string label = 2;
    */
   label = "";
+
   /**
-   * @generated from field: string group = 3;
-   */
-  group = "";
-  /**
-   * @generated from field: string config = 4;
+   * The config of the metric as a JSON string.
+   *
+   * @generated from field: string config = 3;
    */
   config = "";
+
+  /**
+   * The tags of the metric.
+   *
+   * @generated from field: repeated string tags = 4;
+   */
+  tags: string[] = [];
 
   constructor(data?: PartialMessage<MetricConfig>) {
     super();
     proto3.util.initPartial(data, this);
   }
+
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.MetricConfig";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "label", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "config", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    {
+      no: 4,
+      name: "tags",
+      kind: "scalar",
+      T: 9 /* ScalarType.STRING */,
+      repeated: true,
+    },
+  ]);
 
   static fromBinary(
     bytes: Uint8Array,
@@ -2886,6 +3147,9 @@ export class MetricConfig extends Message<MetricConfig> {
 }
 
 /**
+ *
+ * Request for GetModuleMetricsConfig.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetModuleMetricsConfigRequest
  */
 export class GetModuleMetricsConfigRequest extends Message<GetModuleMetricsConfigRequest> {
@@ -2938,6 +3202,9 @@ export class GetModuleMetricsConfigRequest extends Message<GetModuleMetricsConfi
 }
 
 /**
+ *
+ * Response from GetModuleMetricsConfig.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetModuleMetricsConfigResponse
  */
 export class GetModuleMetricsConfigResponse extends Message<GetModuleMetricsConfigResponse> {
@@ -2954,6 +3221,8 @@ export class GetModuleMetricsConfigResponse extends Message<GetModuleMetricsConf
     },
   ]);
   /**
+   * The metrics configs.
+   *
    * @generated from field: repeated kilroy.cilroy.v1alpha.MetricConfig configs = 1;
    */
   configs: MetricConfig[] = [];
@@ -3002,6 +3271,9 @@ export class GetModuleMetricsConfigResponse extends Message<GetModuleMetricsConf
 }
 
 /**
+ *
+ * Metric data.
+ *
  * @generated from message kilroy.cilroy.v1alpha.MetricData
  */
 export class MetricData extends Message<MetricData> {
@@ -3013,14 +3285,20 @@ export class MetricData extends Message<MetricData> {
     { no: 3, name: "data", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
   /**
+   * The ID of the metric.
+   *
    * @generated from field: string metric_id = 1;
    */
   metricId = "";
   /**
+   * The ID of the dataset.
+   *
    * @generated from field: uint64 dataset_id = 2;
    */
   datasetId = protoInt64.zero;
   /**
+   * The data of the metric as a JSON string.
+   *
    * @generated from field: string data = 3;
    */
   data = "";
@@ -3060,6 +3338,9 @@ export class MetricData extends Message<MetricData> {
 }
 
 /**
+ *
+ * Request for GetModuleMetrics.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetModuleMetricsRequest
  */
 export class GetModuleMetricsRequest extends Message<GetModuleMetricsRequest> {
@@ -3108,6 +3389,9 @@ export class GetModuleMetricsRequest extends Message<GetModuleMetricsRequest> {
 }
 
 /**
+ *
+ * Response from GetModuleMetrics.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetModuleMetricsResponse
  */
 export class GetModuleMetricsResponse extends Message<GetModuleMetricsResponse> {
@@ -3117,6 +3401,8 @@ export class GetModuleMetricsResponse extends Message<GetModuleMetricsResponse> 
     { no: 1, name: "metrics", kind: "message", T: MetricData, repeated: true },
   ]);
   /**
+   * The metrics data.
+   *
    * @generated from field: repeated kilroy.cilroy.v1alpha.MetricData metrics = 1;
    */
   metrics: MetricData[] = [];
@@ -3162,6 +3448,9 @@ export class GetModuleMetricsResponse extends Message<GetModuleMetricsResponse> 
 }
 
 /**
+ *
+ * Request for WatchModuleMetrics.
+ *
  * @generated from message kilroy.cilroy.v1alpha.WatchModuleMetricsRequest
  */
 export class WatchModuleMetricsRequest extends Message<WatchModuleMetricsRequest> {
@@ -3210,6 +3499,9 @@ export class WatchModuleMetricsRequest extends Message<WatchModuleMetricsRequest
 }
 
 /**
+ *
+ * Response from WatchModuleMetrics.
+ *
  * @generated from message kilroy.cilroy.v1alpha.WatchModuleMetricsResponse
  */
 export class WatchModuleMetricsResponse extends Message<WatchModuleMetricsResponse> {
@@ -3219,6 +3511,8 @@ export class WatchModuleMetricsResponse extends Message<WatchModuleMetricsRespon
     { no: 1, name: "metric", kind: "message", T: MetricData },
   ]);
   /**
+   * The metric data.
+   *
    * @generated from field: kilroy.cilroy.v1alpha.MetricData metric = 1;
    */
   metric?: MetricData;
@@ -3264,6 +3558,9 @@ export class WatchModuleMetricsResponse extends Message<WatchModuleMetricsRespon
 }
 
 /**
+ *
+ * Request for WatchAll.
+ *
  * @generated from message kilroy.cilroy.v1alpha.WatchAllRequest
  */
 export class WatchAllRequest extends Message<WatchAllRequest> {
@@ -3306,6 +3603,9 @@ export class WatchAllRequest extends Message<WatchAllRequest> {
 }
 
 /**
+ *
+ * Response from WatchAll.
+ *
  * @generated from message kilroy.cilroy.v1alpha.WatchAllResponse
  */
 export class WatchAllResponse extends Message<WatchAllResponse> {
@@ -3316,10 +3616,14 @@ export class WatchAllResponse extends Message<WatchAllResponse> {
     { no: 2, name: "message", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
   /**
+   * The method that the message is from.
+   *
    * @generated from field: string method = 1;
    */
   method = "";
   /**
+   * The message as a JSON string.
+   *
    * @generated from field: string message = 2;
    */
   message = "";
@@ -3359,17 +3663,20 @@ export class WatchAllResponse extends Message<WatchAllResponse> {
 }
 
 /**
+ *
+ * Request for ResetController.
+ *
  * @generated from message kilroy.cilroy.v1alpha.ResetControllerRequest
  */
 export class ResetControllerRequest extends Message<ResetControllerRequest> {
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.ResetControllerRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => []);
+
   constructor(data?: PartialMessage<ResetControllerRequest>) {
     super();
     proto3.util.initPartial(data, this);
   }
-
-  static readonly runtime = proto3;
-  static readonly typeName = "kilroy.cilroy.v1alpha.ResetControllerRequest";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => []);
 
   static fromBinary(
     bytes: Uint8Array,
@@ -3404,17 +3711,20 @@ export class ResetControllerRequest extends Message<ResetControllerRequest> {
 }
 
 /**
+ *
+ * Response from ResetController.
+ *
  * @generated from message kilroy.cilroy.v1alpha.ResetControllerResponse
  */
 export class ResetControllerResponse extends Message<ResetControllerResponse> {
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.ResetControllerResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => []);
+
   constructor(data?: PartialMessage<ResetControllerResponse>) {
     super();
     proto3.util.initPartial(data, this);
   }
-
-  static readonly runtime = proto3;
-  static readonly typeName = "kilroy.cilroy.v1alpha.ResetControllerResponse";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => []);
 
   static fromBinary(
     bytes: Uint8Array,
@@ -3452,17 +3762,20 @@ export class ResetControllerResponse extends Message<ResetControllerResponse> {
 }
 
 /**
+ *
+ * Request for ResetFace.
+ *
  * @generated from message kilroy.cilroy.v1alpha.ResetFaceRequest
  */
 export class ResetFaceRequest extends Message<ResetFaceRequest> {
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.ResetFaceRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => []);
+
   constructor(data?: PartialMessage<ResetFaceRequest>) {
     super();
     proto3.util.initPartial(data, this);
   }
-
-  static readonly runtime = proto3;
-  static readonly typeName = "kilroy.cilroy.v1alpha.ResetFaceRequest";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => []);
 
   static fromBinary(
     bytes: Uint8Array,
@@ -3494,17 +3807,20 @@ export class ResetFaceRequest extends Message<ResetFaceRequest> {
 }
 
 /**
+ *
+ * Response from ResetFace.
+ *
  * @generated from message kilroy.cilroy.v1alpha.ResetFaceResponse
  */
 export class ResetFaceResponse extends Message<ResetFaceResponse> {
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.ResetFaceResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => []);
+
   constructor(data?: PartialMessage<ResetFaceResponse>) {
     super();
     proto3.util.initPartial(data, this);
   }
-
-  static readonly runtime = proto3;
-  static readonly typeName = "kilroy.cilroy.v1alpha.ResetFaceResponse";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => []);
 
   static fromBinary(
     bytes: Uint8Array,
@@ -3536,17 +3852,20 @@ export class ResetFaceResponse extends Message<ResetFaceResponse> {
 }
 
 /**
+ *
+ * Request for ResetModule.
+ *
  * @generated from message kilroy.cilroy.v1alpha.ResetModuleRequest
  */
 export class ResetModuleRequest extends Message<ResetModuleRequest> {
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.ResetModuleRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => []);
+
   constructor(data?: PartialMessage<ResetModuleRequest>) {
     super();
     proto3.util.initPartial(data, this);
   }
-
-  static readonly runtime = proto3;
-  static readonly typeName = "kilroy.cilroy.v1alpha.ResetModuleRequest";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => []);
 
   static fromBinary(
     bytes: Uint8Array,
@@ -3578,17 +3897,20 @@ export class ResetModuleRequest extends Message<ResetModuleRequest> {
 }
 
 /**
+ *
+ * Response from ResetModule.
+ *
  * @generated from message kilroy.cilroy.v1alpha.ResetModuleResponse
  */
 export class ResetModuleResponse extends Message<ResetModuleResponse> {
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.ResetModuleResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => []);
+
   constructor(data?: PartialMessage<ResetModuleResponse>) {
     super();
     proto3.util.initPartial(data, this);
   }
-
-  static readonly runtime = proto3;
-  static readonly typeName = "kilroy.cilroy.v1alpha.ResetModuleResponse";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => []);
 
   static fromBinary(
     bytes: Uint8Array,
@@ -3620,84 +3942,293 @@ export class ResetModuleResponse extends Message<ResetModuleResponse> {
 }
 
 /**
- * @generated from message kilroy.cilroy.v1alpha.Post
+ *
+ * Request for SaveController.
+ *
+ * @generated from message kilroy.cilroy.v1alpha.SaveControllerRequest
  */
-export class Post extends Message<Post> {
-  /**
-   * @generated from field: string id = 1;
-   */
-  id = "";
+export class SaveControllerRequest extends Message<SaveControllerRequest> {
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.SaveControllerRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => []);
 
-  /**
-   * @generated from field: string url = 2;
-   */
-  url = "";
-
-  /**
-   * @generated from field: string content = 3;
-   */
-  content = "";
-
-  /**
-   * @generated from field: string created_at = 4;
-   */
-  createdAt = "";
-
-  constructor(data?: PartialMessage<Post>) {
+  constructor(data?: PartialMessage<SaveControllerRequest>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
-  static readonly runtime = proto3;
-  static readonly typeName = "kilroy.cilroy.v1alpha.Post";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "url", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "content", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "created_at", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ]);
-
   static fromBinary(
     bytes: Uint8Array,
     options?: Partial<BinaryReadOptions>
-  ): Post {
-    return new Post().fromBinary(bytes, options);
+  ): SaveControllerRequest {
+    return new SaveControllerRequest().fromBinary(bytes, options);
   }
 
   static fromJson(
     jsonValue: JsonValue,
     options?: Partial<JsonReadOptions>
-  ): Post {
-    return new Post().fromJson(jsonValue, options);
+  ): SaveControllerRequest {
+    return new SaveControllerRequest().fromJson(jsonValue, options);
   }
 
   static fromJsonString(
     jsonString: string,
     options?: Partial<JsonReadOptions>
-  ): Post {
-    return new Post().fromJsonString(jsonString, options);
+  ): SaveControllerRequest {
+    return new SaveControllerRequest().fromJsonString(jsonString, options);
   }
 
   static equals(
-    a: Post | PlainMessage<Post> | undefined,
-    b: Post | PlainMessage<Post> | undefined
+    a: SaveControllerRequest | PlainMessage<SaveControllerRequest> | undefined,
+    b: SaveControllerRequest | PlainMessage<SaveControllerRequest> | undefined
   ): boolean {
-    return proto3.util.equals(Post, a, b);
+    return proto3.util.equals(SaveControllerRequest, a, b);
   }
 }
 
 /**
- * @generated from message kilroy.cilroy.v1alpha.GetFeedRequest
+ *
+ * Response from SaveController.
+ *
+ * @generated from message kilroy.cilroy.v1alpha.SaveControllerResponse
  */
-export class GetFeedRequest extends Message<GetFeedRequest> {
-  constructor(data?: PartialMessage<GetFeedRequest>) {
+export class SaveControllerResponse extends Message<SaveControllerResponse> {
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.SaveControllerResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => []);
+
+  constructor(data?: PartialMessage<SaveControllerResponse>) {
     super();
     proto3.util.initPartial(data, this);
   }
 
+  static fromBinary(
+    bytes: Uint8Array,
+    options?: Partial<BinaryReadOptions>
+  ): SaveControllerResponse {
+    return new SaveControllerResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(
+    jsonValue: JsonValue,
+    options?: Partial<JsonReadOptions>
+  ): SaveControllerResponse {
+    return new SaveControllerResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(
+    jsonString: string,
+    options?: Partial<JsonReadOptions>
+  ): SaveControllerResponse {
+    return new SaveControllerResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(
+    a:
+      | SaveControllerResponse
+      | PlainMessage<SaveControllerResponse>
+      | undefined,
+    b: SaveControllerResponse | PlainMessage<SaveControllerResponse> | undefined
+  ): boolean {
+    return proto3.util.equals(SaveControllerResponse, a, b);
+  }
+}
+
+/**
+ *
+ * Request for SaveFace.
+ *
+ * @generated from message kilroy.cilroy.v1alpha.SaveFaceRequest
+ */
+export class SaveFaceRequest extends Message<SaveFaceRequest> {
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.SaveFaceRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => []);
+
+  constructor(data?: PartialMessage<SaveFaceRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static fromBinary(
+    bytes: Uint8Array,
+    options?: Partial<BinaryReadOptions>
+  ): SaveFaceRequest {
+    return new SaveFaceRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(
+    jsonValue: JsonValue,
+    options?: Partial<JsonReadOptions>
+  ): SaveFaceRequest {
+    return new SaveFaceRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(
+    jsonString: string,
+    options?: Partial<JsonReadOptions>
+  ): SaveFaceRequest {
+    return new SaveFaceRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(
+    a: SaveFaceRequest | PlainMessage<SaveFaceRequest> | undefined,
+    b: SaveFaceRequest | PlainMessage<SaveFaceRequest> | undefined
+  ): boolean {
+    return proto3.util.equals(SaveFaceRequest, a, b);
+  }
+}
+
+/**
+ *
+ * Response from SaveFace.
+ *
+ * @generated from message kilroy.cilroy.v1alpha.SaveFaceResponse
+ */
+export class SaveFaceResponse extends Message<SaveFaceResponse> {
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.SaveFaceResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => []);
+
+  constructor(data?: PartialMessage<SaveFaceResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static fromBinary(
+    bytes: Uint8Array,
+    options?: Partial<BinaryReadOptions>
+  ): SaveFaceResponse {
+    return new SaveFaceResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(
+    jsonValue: JsonValue,
+    options?: Partial<JsonReadOptions>
+  ): SaveFaceResponse {
+    return new SaveFaceResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(
+    jsonString: string,
+    options?: Partial<JsonReadOptions>
+  ): SaveFaceResponse {
+    return new SaveFaceResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(
+    a: SaveFaceResponse | PlainMessage<SaveFaceResponse> | undefined,
+    b: SaveFaceResponse | PlainMessage<SaveFaceResponse> | undefined
+  ): boolean {
+    return proto3.util.equals(SaveFaceResponse, a, b);
+  }
+}
+
+/**
+ *
+ * Request for SaveModule.
+ *
+ * @generated from message kilroy.cilroy.v1alpha.SaveModuleRequest
+ */
+export class SaveModuleRequest extends Message<SaveModuleRequest> {
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.SaveModuleRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => []);
+
+  constructor(data?: PartialMessage<SaveModuleRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static fromBinary(
+    bytes: Uint8Array,
+    options?: Partial<BinaryReadOptions>
+  ): SaveModuleRequest {
+    return new SaveModuleRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(
+    jsonValue: JsonValue,
+    options?: Partial<JsonReadOptions>
+  ): SaveModuleRequest {
+    return new SaveModuleRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(
+    jsonString: string,
+    options?: Partial<JsonReadOptions>
+  ): SaveModuleRequest {
+    return new SaveModuleRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(
+    a: SaveModuleRequest | PlainMessage<SaveModuleRequest> | undefined,
+    b: SaveModuleRequest | PlainMessage<SaveModuleRequest> | undefined
+  ): boolean {
+    return proto3.util.equals(SaveModuleRequest, a, b);
+  }
+}
+
+/**
+ *
+ * Response from SaveModule.
+ *
+ * @generated from message kilroy.cilroy.v1alpha.SaveModuleResponse
+ */
+export class SaveModuleResponse extends Message<SaveModuleResponse> {
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.SaveModuleResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => []);
+
+  constructor(data?: PartialMessage<SaveModuleResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static fromBinary(
+    bytes: Uint8Array,
+    options?: Partial<BinaryReadOptions>
+  ): SaveModuleResponse {
+    return new SaveModuleResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(
+    jsonValue: JsonValue,
+    options?: Partial<JsonReadOptions>
+  ): SaveModuleResponse {
+    return new SaveModuleResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(
+    jsonString: string,
+    options?: Partial<JsonReadOptions>
+  ): SaveModuleResponse {
+    return new SaveModuleResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(
+    a: SaveModuleResponse | PlainMessage<SaveModuleResponse> | undefined,
+    b: SaveModuleResponse | PlainMessage<SaveModuleResponse> | undefined
+  ): boolean {
+    return proto3.util.equals(SaveModuleResponse, a, b);
+  }
+}
+
+/**
+ *
+ * Request for GetFeed.
+ *
+ * @generated from message kilroy.cilroy.v1alpha.GetFeedRequest
+ */
+export class GetFeedRequest extends Message<GetFeedRequest> {
   static readonly runtime = proto3;
   static readonly typeName = "kilroy.cilroy.v1alpha.GetFeedRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => []);
+
+  constructor(data?: PartialMessage<GetFeedRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
 
   static fromBinary(
     bytes: Uint8Array,
@@ -3729,24 +4260,49 @@ export class GetFeedRequest extends Message<GetFeedRequest> {
 }
 
 /**
+ *
+ * Response from GetFeed.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GetFeedResponse
  */
 export class GetFeedResponse extends Message<GetFeedResponse> {
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.GetFeedResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "url", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "content", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "created_at", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
   /**
-   * @generated from field: repeated kilroy.cilroy.v1alpha.Post posts = 1;
+   * The ID of the post.
+   *
+   * @generated from field: string id = 1;
    */
-  posts: Post[] = [];
+  id = "";
+  /**
+   * The URL of the post.
+   *
+   * @generated from field: string url = 2;
+   */
+  url = "";
+  /**
+   * The content of the post as a JSON string.
+   *
+   * @generated from field: string content = 3;
+   */
+  content = "";
+  /**
+   * The creation time of the post.
+   *
+   * @generated from field: string created_at = 4;
+   */
+  createdAt = "";
 
   constructor(data?: PartialMessage<GetFeedResponse>) {
     super();
     proto3.util.initPartial(data, this);
   }
-
-  static readonly runtime = proto3;
-  static readonly typeName = "kilroy.cilroy.v1alpha.GetFeedResponse";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "posts", kind: "message", T: Post, repeated: true },
-  ]);
 
   static fromBinary(
     bytes: Uint8Array,
@@ -3778,17 +4334,20 @@ export class GetFeedResponse extends Message<GetFeedResponse> {
 }
 
 /**
+ *
+ * Request for WatchFeed.
+ *
  * @generated from message kilroy.cilroy.v1alpha.WatchFeedRequest
  */
 export class WatchFeedRequest extends Message<WatchFeedRequest> {
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.WatchFeedRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => []);
+
   constructor(data?: PartialMessage<WatchFeedRequest>) {
     super();
     proto3.util.initPartial(data, this);
   }
-
-  static readonly runtime = proto3;
-  static readonly typeName = "kilroy.cilroy.v1alpha.WatchFeedRequest";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => []);
 
   static fromBinary(
     bytes: Uint8Array,
@@ -3820,24 +4379,49 @@ export class WatchFeedRequest extends Message<WatchFeedRequest> {
 }
 
 /**
+ *
+ * Response from WatchFeed.
+ *
  * @generated from message kilroy.cilroy.v1alpha.WatchFeedResponse
  */
 export class WatchFeedResponse extends Message<WatchFeedResponse> {
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.WatchFeedResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "url", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "content", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "created_at", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
   /**
-   * @generated from field: kilroy.cilroy.v1alpha.Post post = 1;
+   * The ID of the post.
+   *
+   * @generated from field: string id = 1;
    */
-  post?: Post;
+  id = "";
+  /**
+   * The URL of the post.
+   *
+   * @generated from field: string url = 2;
+   */
+  url = "";
+  /**
+   * The content of the post as a JSON string.
+   *
+   * @generated from field: string content = 3;
+   */
+  content = "";
+  /**
+   * The creation time of the post.
+   *
+   * @generated from field: string created_at = 4;
+   */
+  createdAt = "";
 
   constructor(data?: PartialMessage<WatchFeedResponse>) {
     super();
     proto3.util.initPartial(data, this);
   }
-
-  static readonly runtime = proto3;
-  static readonly typeName = "kilroy.cilroy.v1alpha.WatchFeedResponse";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "post", kind: "message", T: Post },
-  ]);
 
   static fromBinary(
     bytes: Uint8Array,
@@ -3869,10 +4453,20 @@ export class WatchFeedResponse extends Message<WatchFeedResponse> {
 }
 
 /**
+ *
+ * Request for GeneratePosts.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GeneratePostsRequest
  */
 export class GeneratePostsRequest extends Message<GeneratePostsRequest> {
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.GeneratePostsRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "quantity", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+  ]);
   /**
+   * The quantity of posts to generate.
+   *
    * @generated from field: uint64 quantity = 1;
    */
   quantity = protoInt64.zero;
@@ -3881,12 +4475,6 @@ export class GeneratePostsRequest extends Message<GeneratePostsRequest> {
     super();
     proto3.util.initPartial(data, this);
   }
-
-  static readonly runtime = proto3;
-  static readonly typeName = "kilroy.cilroy.v1alpha.GeneratePostsRequest";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "quantity", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
-  ]);
 
   static fromBinary(
     bytes: Uint8Array,
@@ -3918,10 +4506,20 @@ export class GeneratePostsRequest extends Message<GeneratePostsRequest> {
 }
 
 /**
+ *
+ * Response from GeneratePosts.
+ *
  * @generated from message kilroy.cilroy.v1alpha.GeneratePostsResponse
  */
 export class GeneratePostsResponse extends Message<GeneratePostsResponse> {
+  static readonly runtime = proto3;
+  static readonly typeName = "kilroy.cilroy.v1alpha.GeneratePostsResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "content", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
   /**
+   * The content of the posts as a JSON string.
+   *
    * @generated from field: string content = 1;
    */
   content = "";
@@ -3930,12 +4528,6 @@ export class GeneratePostsResponse extends Message<GeneratePostsResponse> {
     super();
     proto3.util.initPartial(data, this);
   }
-
-  static readonly runtime = proto3;
-  static readonly typeName = "kilroy.cilroy.v1alpha.GeneratePostsResponse";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "content", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ]);
 
   static fromBinary(
     bytes: Uint8Array,

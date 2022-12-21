@@ -5,14 +5,15 @@ import { useLabels } from "../contexts/labels";
 import PageLayout from "../components/PageLayout";
 import { useConfig } from "../contexts/config";
 import Center from "../components/Center";
-import { Button, Loader, Title } from "@mantine/core";
+import { Button, Loader, Stack, Title } from "@mantine/core";
 import Segment from "../components/Segment";
 import { useConfigSchema } from "../contexts/configSchema";
 import SchemaBasedForm from "../components/SchemaBasedForm";
 import { objectDiff } from "../lib/utils";
-import { client, request } from "../lib/cilroy";
+import { client } from "../lib/cilroy";
 import { useStatus } from "../contexts/status";
 import { Status } from "../lib/protobuf";
+import useRequestCallback from "../hooks/useRequestCallback";
 
 export default function Face() {
   const labels = useLabels();
@@ -20,36 +21,38 @@ export default function Face() {
   const { face: schema } = useConfigSchema();
   const { face: faceStatus, controller: controllerStatus } = useStatus();
 
+  const { callback: setConfig, loading: setConfigLoading } = useRequestCallback(
+    client.setFaceConfig
+  );
+  const { callback: save, loading: saveLoading } = useRequestCallback(
+    client.saveFace
+  );
+  const { callback: reset, loading: resetLoading } = useRequestCallback(
+    client.resetFace
+  );
+
   const handleSubmit = useCallback(
     async (data) => {
       const diff = objectDiff(data, config);
       if (diff !== null) {
-        const { result, abort } = request({
-          method: client.setFaceConfig,
-          params: { config: JSON.stringify(diff) },
-          retryOptions: { retriesLeft: 3 },
-        });
-        await result;
-        return () => abort.abort();
+        await setConfig({ params: { config: JSON.stringify(diff) } });
       }
     },
     [client, config]
   );
 
+  const handleSave = useCallback(async () => {
+    await save();
+  }, [client]);
+
   const handleReset = useCallback(async () => {
-    const { result, abort } = request({
-      method: client.resetFace,
-      params: {},
-      retryOptions: { retriesLeft: 3 },
-    });
-    await result;
-    return () => abort.abort();
+    await reset();
   }, [client]);
 
   return (
     <>
       <Head>
-        <title>{labels.face.title}</title>
+        <title>{labels.pages.face.title}</title>
       </Head>
       <PageLayout page="face">
         <Segment>
@@ -58,11 +61,18 @@ export default function Face() {
           faceStatus !== Status.UNSPECIFIED &&
           controllerStatus !== Status.UNSPECIFIED ? (
             <>
-              <Title order={4}>{labels.face.config.title}</Title>
+              <Title order={4}>{labels.pages.face.config.title}</Title>
               <SchemaBasedForm
                 schema={schema}
                 data={config}
-                onSubmit={handleSubmit}
+                submit={{
+                  label: labels.pages.face.config.buttons.submit,
+                  loading:
+                    faceStatus !== Status.READY ||
+                    controllerStatus !== Status.READY ||
+                    setConfigLoading,
+                  onSubmit: handleSubmit,
+                }}
               />
             </>
           ) : (
@@ -74,18 +84,29 @@ export default function Face() {
         <Segment>
           {faceStatus !== Status.UNSPECIFIED &&
           controllerStatus !== Status.UNSPECIFIED ? (
-            <>
-              <Title order={4}>{labels.face.dangerZone.title}</Title>
+            <Stack>
+              <Title order={4}>{labels.pages.face.dangerZone.title}</Title>
+              <Button
+                onClick={handleSave}
+                loading={
+                  faceStatus !== Status.READY ||
+                  controllerStatus !== Status.READY ||
+                  saveLoading
+                }
+              >
+                {labels.pages.face.dangerZone.buttons.save}
+              </Button>
               <Button
                 onClick={handleReset}
                 loading={
                   faceStatus !== Status.READY ||
-                  controllerStatus !== Status.READY
+                  controllerStatus !== Status.READY ||
+                  resetLoading
                 }
               >
-                {labels.face.dangerZone.buttons.reset}
+                {labels.pages.face.dangerZone.buttons.reset}
               </Button>
-            </>
+            </Stack>
           ) : (
             <Center>
               <Loader />

@@ -4,7 +4,7 @@ export type TextDisplayProps = {
   text: string;
 };
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles(() => ({
   blockquote: {
     padding: 0,
   },

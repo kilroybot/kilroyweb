@@ -28,6 +28,8 @@ import { ConfigSchemaProvider } from "../contexts/configSchema";
 import { MetadataProvider } from "../contexts/metadata";
 import { FeedProvider } from "../contexts/feed";
 import { PostSchemaProvider } from "../contexts/postSchema";
+import { Provider } from "react-redux";
+import { store } from "../state/store";
 
 type MantineAppProps = {
   colorScheme: ColorScheme;
@@ -62,43 +64,45 @@ export default function App(props: ExtendedAppProps) {
         />
         <link rel="shortcut icon" href="/favicon.svg" />
       </Head>
-      <ColorSchemeProvider
-        colorScheme={colorScheme}
-        toggleColorScheme={toggleColorScheme}
-      >
-        <MantineProvider
-          theme={{ ...theme, colorScheme: colorScheme }}
-          withGlobalStyles
-          withNormalizeCSS
+      <Provider store={store}>
+        <ColorSchemeProvider
+          colorScheme={colorScheme}
+          toggleColorScheme={toggleColorScheme}
         >
-          <NotificationsProvider position="top-right">
-            <LabelsProvider>
-              <ToastsProvider>
-                <StreamsProvider>
-                  <MetadataProvider>
-                    <StatusProvider>
-                      <TrainingStatusProvider>
-                        <RawMetricsProvider>
-                          <PostSchemaProvider>
-                            <ConfigSchemaProvider>
-                              <ConfigProvider>
-                                <FeedProvider>
-                                  <RouterTransition />
-                                  <props.Component {...props.pageProps} />
-                                </FeedProvider>
-                              </ConfigProvider>
-                            </ConfigSchemaProvider>
-                          </PostSchemaProvider>
-                        </RawMetricsProvider>
-                      </TrainingStatusProvider>
-                    </StatusProvider>
-                  </MetadataProvider>
-                </StreamsProvider>
-              </ToastsProvider>
-            </LabelsProvider>
-          </NotificationsProvider>
-        </MantineProvider>
-      </ColorSchemeProvider>
+          <MantineProvider
+            theme={{ ...theme, colorScheme: colorScheme }}
+            withGlobalStyles
+            withNormalizeCSS
+          >
+            <NotificationsProvider position="top-right">
+              <LabelsProvider>
+                <ToastsProvider>
+                  <StreamsProvider>
+                    <MetadataProvider>
+                      <StatusProvider>
+                        <TrainingStatusProvider>
+                          <RawMetricsProvider>
+                            <PostSchemaProvider>
+                              <ConfigSchemaProvider>
+                                <ConfigProvider>
+                                  <FeedProvider>
+                                    <RouterTransition />
+                                    <props.Component {...props.pageProps} />
+                                  </FeedProvider>
+                                </ConfigProvider>
+                              </ConfigSchemaProvider>
+                            </PostSchemaProvider>
+                          </RawMetricsProvider>
+                        </TrainingStatusProvider>
+                      </StatusProvider>
+                    </MetadataProvider>
+                  </StreamsProvider>
+                </ToastsProvider>
+              </LabelsProvider>
+            </NotificationsProvider>
+          </MantineProvider>
+        </ColorSchemeProvider>
+      </Provider>
     </>
   );
 }

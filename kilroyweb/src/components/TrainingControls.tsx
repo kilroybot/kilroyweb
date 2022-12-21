@@ -1,43 +1,39 @@
-import { Button, Grid, Group, Loader, Title } from "@mantine/core";
+import { Button, Grid, Loader, Title } from "@mantine/core";
 import { Status, TrainingStatus } from "../lib/protobuf";
 import * as React from "react";
 import { useCallback } from "react";
-import { client, request } from "../lib/cilroy";
+import { client } from "../lib/cilroy";
 import { useTrainingStatus } from "../contexts/trainingStatus";
 import { useStatus } from "../contexts/status";
 import Center from "./Center";
+import useRequestCallback from "../hooks/useRequestCallback";
+import { useLabels } from "../contexts/labels";
 
 export type TrainingControlsProps = {};
 
 export default function TrainingControls({}: TrainingControlsProps) {
   const { controller, face, module } = useStatus();
   const trainingStatus = useTrainingStatus();
+  const labels = useLabels();
+
+  const { callback: startOffline, loading: startOfflineLoading } =
+    useRequestCallback(client.trainOffline);
+  const { callback: startOnline, loading: startOnlineLoading } =
+    useRequestCallback(client.trainOnline);
+  const { callback: stop, loading: stopLoading } = useRequestCallback(
+    client.stopTraining
+  );
 
   const onStartOfflineClick = useCallback(async () => {
-    const { result } = request({
-      method: client.trainOffline,
-      params: {},
-      retryOptions: { retriesLeft: 3 },
-    });
-    await result;
+    await startOffline();
   }, [client]);
 
   const onStartOnlineClick = useCallback(async () => {
-    const { result } = request({
-      method: client.trainOnline,
-      params: {},
-      retryOptions: { retriesLeft: 3 },
-    });
-    await result;
+    await startOnline();
   }, [client]);
 
   const onStopClick = useCallback(async () => {
-    const { result } = request({
-      method: client.stopTraining,
-      params: {},
-      retryOptions: { retriesLeft: 3 },
-    });
-    await result;
+    await stop();
   }, [client]);
 
   if (
@@ -58,28 +54,31 @@ export default function TrainingControls({}: TrainingControlsProps) {
         <Grid.Col span="auto">
           <Button
             disabled={trainingStatus !== TrainingStatus.IDLE}
+            loading={startOfflineLoading}
             onClick={onStartOfflineClick}
             fullWidth
           >
-            Start offline
+            {labels.pages.training.buttons.startOffline}
           </Button>
         </Grid.Col>
         <Grid.Col span="auto">
           <Button
             disabled={trainingStatus !== TrainingStatus.IDLE}
+            loading={startOnlineLoading}
             onClick={onStartOnlineClick}
             fullWidth
           >
-            Start online
+            {labels.pages.training.buttons.startOnline}
           </Button>
         </Grid.Col>
         <Grid.Col span="auto">
           <Button
             disabled={trainingStatus === TrainingStatus.IDLE}
+            loading={stopLoading}
             onClick={onStopClick}
             fullWidth
           >
-            Stop
+            {labels.pages.training.buttons.stop}
           </Button>
         </Grid.Col>
       </Grid>

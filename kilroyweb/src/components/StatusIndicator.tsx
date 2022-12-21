@@ -9,7 +9,7 @@ export type StatusIndicatorProps = {
   offGlow?: boolean;
 };
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles(() => ({
   box: {
     width: "0.75em",
     height: "0.75em",

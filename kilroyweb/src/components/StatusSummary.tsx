@@ -1,19 +1,11 @@
-import {
-  Center,
-  Grid,
-  List,
-  Loader,
-  Stack,
-  Title,
-  useMantineTheme,
-} from "@mantine/core";
+import { Center, Grid, Loader, Title, useMantineTheme } from "@mantine/core";
 import { Status } from "../lib/protobuf";
 import { useStatus } from "../contexts/status";
 import StatusIndicator from "./StatusIndicator";
 
 export type StatusSummaryProps = {};
 
-export const StatusSummary = (props: StatusSummaryProps) => {
+export const StatusSummary = ({}: StatusSummaryProps) => {
   const status = useStatus();
   const theme = useMantineTheme();
 

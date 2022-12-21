@@ -1,22 +1,10 @@
 import { ArrayFieldTemplateItemType } from "@rjsf/utils";
-import { Box, Button, createStyles, Grid } from "@mantine/core";
+import { Box, Button, Grid } from "@mantine/core";
 import { cloneElement } from "react";
 import { toOrdinal } from "../../../lib/utils";
 import { IconArrowDown, IconArrowUp, IconTrash } from "@tabler/icons";
 
 export type ArrayFieldItemTemplateProps = ArrayFieldTemplateItemType;
-
-const useStyles = createStyles((theme) => ({
-  container: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "end",
-    gap: theme.spacing.md,
-  },
-  item: {
-    flex: 1,
-  },
-}));
 
 export default function ArrayFieldItemTemplate({
   children,
@@ -30,8 +18,6 @@ export default function ArrayFieldItemTemplate({
   onReorderClick,
   readonly,
 }: ArrayFieldItemTemplateProps) {
-  const { classes } = useStyles();
-
   const newChildren = cloneElement(children, {
     uiSchema: { "ui:title": `${toOrdinal(index + 1)} item` },
   });

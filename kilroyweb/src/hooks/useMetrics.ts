@@ -4,7 +4,7 @@ import { ChartProps } from "react-chartjs-2/dist/types";
 export type Metric = {
   id: string;
   label: string;
-  group: string;
+  tags: string[];
   chartData: ChartProps;
 };
 
@@ -23,7 +23,7 @@ export default function useMetrics(): Metrics | undefined {
     const metric = {
       id: config.id,
       label: config.label,
-      group: config.group,
+      tags: config.tags,
       chartData: chartData,
     };
     return {
@@ -34,6 +34,7 @@ export default function useMetrics(): Metrics | undefined {
 
   rawMetrics.data.forEach((data) => {
     const metric = metrics[data.metricId];
+    if (metric === undefined) return;
     const parsedData = JSON.parse(data.data);
     metric.chartData.data.datasets[data.datasetId].data.push(parsedData);
   });

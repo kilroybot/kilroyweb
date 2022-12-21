@@ -2,15 +2,15 @@ import {
   Chart as ReactChartJS,
   ChartProps as ReactChartJSProps,
 } from "react-chartjs-2";
-import ChartJS, { ChartTypeRegistry } from "chart.js/auto";
+import ChartJS from "chart.js/auto";
 import { ChartJSOrUndefined, ForwardedRef } from "react-chartjs-2/dist/types";
-import { DistributiveArray } from "chart.js/types/utils";
+import { ChartType, DefaultDataPoint } from "chart.js";
 
 ChartJS.register();
 
 export type BaseChartProps<
-  TType extends keyof ChartTypeRegistry = keyof ChartTypeRegistry,
-  TData = DistributiveArray<ChartTypeRegistry[TType]["defaultDataPoint"]>,
+  TType extends ChartType = ChartType,
+  TData = DefaultDataPoint<TType>,
   TLabel = unknown
 > = ReactChartJSProps<TType, TData, TLabel> & {
   chartRef?: ForwardedRef<ChartJSOrUndefined<TType, TData, TLabel>> | undefined;

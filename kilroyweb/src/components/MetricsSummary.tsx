@@ -7,13 +7,13 @@ import { merge } from "lodash-es";
 
 export type MetricsSummaryProps = {};
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles(() => ({
   carousel: {
     width: "100%",
   },
 }));
 
-export const MetricsSummary = (props: MetricsSummaryProps) => {
+export const MetricsSummary = ({}: MetricsSummaryProps) => {
   const { classes } = useStyles();
 
   const metrics = useMetrics();
@@ -42,7 +42,7 @@ export const MetricsSummary = (props: MetricsSummaryProps) => {
           draggable={true}
           className={classes.carousel}
         >
-          {Object.keys(metrics).map((metricId) => (
+          {[...Object.keys(metrics)].sort().map((metricId) => (
             <Carousel.Slide key={metricId}>
               <Stack>
                 <Title align="center" order={6}>

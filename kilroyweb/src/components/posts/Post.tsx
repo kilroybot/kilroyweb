@@ -1,11 +1,15 @@
-import { Post as PostData } from "../../lib/protobuf";
 import { Container, createStyles, Stack, Text } from "@mantine/core";
 import dayjs from "../../lib/dayjs";
 import * as React from "react";
 import PostContent from "./PostContent";
 
 export type PostProps = {
-  post: PostData;
+  post: {
+    id: string;
+    url?: string;
+    content: string;
+    createdAt: string;
+  };
 };
 
 const useStyles = createStyles((theme) => ({
