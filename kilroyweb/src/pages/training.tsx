@@ -11,16 +11,22 @@ import { TrainingStatusDisplay } from "../components/TrainingStatusDisplay";
 import TrainingControls from "../components/TrainingControls";
 import { useStatus } from "../contexts/status";
 import { Status } from "../lib/protobuf";
+import { setAccordion } from "../state/slices/accordions";
+import useAppSelector from "../hooks/useAppSelector";
+import useAppDispatch from "../hooks/useAppDispatch";
 
 export default function Training() {
   const { module } = useStatus();
   const labels = useLabels();
   const metrics = useMetrics();
 
+  const accordions = useAppSelector((state) => state.accordions.accordions);
+  const dispatch = useAppDispatch();
+
   return (
     <>
       <Head>
-        <title>{labels.training.title}</title>
+        <title>{labels.pages.training.title}</title>
       </Head>
       <PageLayout page="training">
         <Stack spacing="lg">
@@ -44,10 +50,15 @@ export default function Training() {
             </Segment>
           ) : (
             <>
-              {Object.keys(metrics).map((metricId) => (
+              {[...Object.keys(metrics)].sort().map((metricId) => (
                 <Segment key={metricId}>
                   <Accordion
-                    defaultValue="item"
+                    value={accordions[metricId] ?? false ? "item" : null}
+                    onChange={(value) => {
+                      dispatch(
+                        setAccordion({ key: metricId, value: value === "item" })
+                      );
+                    }}
                     variant="filled"
                     styles={{
                       content: { padding: "initial" },

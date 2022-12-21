@@ -7,60 +7,79 @@ const labels = {
       success: "Success",
     },
   },
-  index: {
-    title: "kilroyweb",
-    metadata: {
-      face: "Face",
-      module: "Module",
-    },
-  },
-  training: {
-    title: "Training",
-  },
-  controller: {
-    title: "Controller",
-    config: {
-      title: "Configuration",
-    },
-    dangerZone: {
-      title: "Danger Zone",
-      buttons: {
-        reset: "Reset state",
+  pages: {
+    index: {
+      title: "kilroyweb",
+      metadata: {
+        face: "Face",
+        module: "Module",
       },
     },
-  },
-  face: {
-    title: "Face",
-    config: {
-      title: "Configuration",
-    },
-    dangerZone: {
-      title: "Danger Zone",
+    training: {
+      title: "kilroyweb · training",
       buttons: {
-        reset: "Reset state",
+        startOffline: "Start offline",
+        startOnline: "Start online",
+        stop: "Stop",
       },
     },
-  },
-  module: {
-    title: "Module",
-    config: {
-      title: "Configuration",
-    },
-    dangerZone: {
-      title: "Danger Zone",
-      buttons: {
-        reset: "Reset state",
+    controller: {
+      title: "kilroyweb · controller",
+      config: {
+        title: "Configuration",
+        buttons: {
+          submit: "Submit",
+        },
+      },
+      dangerZone: {
+        title: "Danger Zone",
+        buttons: {
+          save: "Save state",
+          reset: "Reset state",
+        },
       },
     },
-  },
-  feed: {
-    title: "Feed",
-    empty: "No posts yet",
-  },
-  playground: {
-    title: "Playground",
-    buttons: {
-      generate: "Generate",
+    face: {
+      title: "kilroyweb · face",
+      config: {
+        title: "Configuration",
+        buttons: {
+          submit: "Submit",
+        },
+      },
+      dangerZone: {
+        title: "Danger Zone",
+        buttons: {
+          save: "Save state",
+          reset: "Reset state",
+        },
+      },
+    },
+    module: {
+      title: "kilroyweb · module",
+      config: {
+        title: "Configuration",
+        buttons: {
+          submit: "Submit",
+        },
+      },
+      dangerZone: {
+        title: "Danger Zone",
+        buttons: {
+          save: "Save state",
+          reset: "Reset state",
+        },
+      },
+    },
+    feed: {
+      title: "kilroyweb · feed",
+      empty: "No posts yet",
+    },
+    playground: {
+      title: "kilroyweb · playground",
+      buttons: {
+        generate: "Generate",
+      },
     },
   },
 };

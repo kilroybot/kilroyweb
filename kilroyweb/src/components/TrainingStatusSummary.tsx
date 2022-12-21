@@ -1,4 +1,4 @@
-import { Grid, Loader, Stack, Title } from "@mantine/core";
+import { Grid, Loader, Title } from "@mantine/core";
 import { Status, TrainingStatus } from "../lib/protobuf";
 import { useTrainingStatus } from "../contexts/trainingStatus";
 import Center from "./Center";
@@ -8,7 +8,7 @@ import { useStatus } from "../contexts/status";
 
 export type TrainingStatusSummaryProps = {};
 
-export const TrainingStatusSummary = (props: TrainingStatusSummaryProps) => {
+export const TrainingStatusSummary = ({}: TrainingStatusSummaryProps) => {
   const { controller } = useStatus();
   const trainingStatus = useTrainingStatus();
 

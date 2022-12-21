@@ -32,7 +32,7 @@ export default function Playground() {
   return (
     <>
       <Head>
-        <title>{labels.playground.title}</title>
+        <title>{labels.pages.playground.title}</title>
       </Head>
       <PageLayout page="playground">
         <Stack spacing="lg">
@@ -49,7 +49,7 @@ export default function Playground() {
           )}
           <Segment>
             <Button onClick={handleClick}>
-              {labels.playground.buttons.generate}
+              {labels.pages.playground.buttons.generate}
             </Button>
           </Segment>
         </Stack>

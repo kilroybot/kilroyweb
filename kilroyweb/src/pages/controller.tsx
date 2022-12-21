@@ -6,13 +6,14 @@ import PageLayout from "../components/PageLayout";
 import Segment from "../components/Segment";
 import { useConfig } from "../contexts/config";
 import Center from "../components/Center";
-import { Button, Loader, Title } from "@mantine/core";
+import { Button, Loader, Stack, Title } from "@mantine/core";
 import { useConfigSchema } from "../contexts/configSchema";
 import SchemaBasedForm from "../components/SchemaBasedForm";
 import { objectDiff } from "../lib/utils";
-import { client, request } from "../lib/cilroy";
+import { client } from "../lib/cilroy";
 import { useStatus } from "../contexts/status";
 import { Status } from "../lib/protobuf";
+import useRequestCallback from "../hooks/useRequestCallback";
 
 export default function Controller() {
   const labels = useLabels();
@@ -20,46 +21,52 @@ export default function Controller() {
   const { controller: schema } = useConfigSchema();
   const { controller: status } = useStatus();
 
+  const { callback: setConfig, loading: setConfigLoading } = useRequestCallback(
+    client.setControllerConfig
+  );
+  const { callback: save, loading: saveLoading } = useRequestCallback(
+    client.saveController
+  );
+  const { callback: reset, loading: resetLoading } = useRequestCallback(
+    client.resetController
+  );
+
   const handleSubmit = useCallback(
     async (data) => {
       const diff = objectDiff(data, config);
       if (diff !== null) {
-        const { result, abort } = request({
-          method: client.setControllerConfig,
-          params: { config: JSON.stringify(diff) },
-          retryOptions: { retriesLeft: 3 },
-        });
-        await result;
-        return () => abort.abort();
+        await setConfig({ params: { config: JSON.stringify(diff) } });
       }
     },
     [client, config]
   );
 
+  const handleSave = useCallback(async () => {
+    await save();
+  }, [client]);
+
   const handleReset = useCallback(async () => {
-    const { result, abort } = request({
-      method: client.resetController,
-      params: {},
-      retryOptions: { retriesLeft: 3 },
-    });
-    await result;
-    return () => abort.abort();
+    await reset();
   }, [client]);
 
   return (
     <>
       <Head>
-        <title>{labels.controller.title}</title>
+        <title>{labels.pages.controller.title}</title>
       </Head>
       <PageLayout page="controller">
         <Segment>
           {config && schema && status !== Status.UNSPECIFIED ? (
             <>
-              <Title order={4}>{labels.controller.config.title}</Title>
+              <Title order={4}>{labels.pages.controller.config.title}</Title>
               <SchemaBasedForm
                 schema={schema}
                 data={config}
-                onSubmit={handleSubmit}
+                submit={{
+                  label: labels.pages.controller.config.buttons.submit,
+                  loading: status !== Status.READY || setConfigLoading,
+                  onSubmit: handleSubmit,
+                }}
               />
             </>
           ) : (
@@ -70,12 +77,23 @@ export default function Controller() {
         </Segment>
         <Segment>
           {status !== Status.UNSPECIFIED ? (
-            <>
-              <Title order={4}>{labels.controller.dangerZone.title}</Title>
-              <Button onClick={handleReset} loading={status !== Status.READY}>
-                {labels.controller.dangerZone.buttons.reset}
+            <Stack>
+              <Title order={4}>
+                {labels.pages.controller.dangerZone.title}
+              </Title>
+              <Button
+                onClick={handleSave}
+                loading={status !== Status.READY || saveLoading}
+              >
+                {labels.pages.controller.dangerZone.buttons.save}
               </Button>
-            </>
+              <Button
+                onClick={handleReset}
+                loading={status !== Status.READY || resetLoading}
+              >
+                {labels.pages.controller.dangerZone.buttons.reset}
+              </Button>
+            </Stack>
           ) : (
             <Center>
               <Loader />

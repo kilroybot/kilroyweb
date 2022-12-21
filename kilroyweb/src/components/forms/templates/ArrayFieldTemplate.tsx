@@ -1,13 +1,25 @@
 import {
   ArrayFieldTemplateProps as RjsfArrayFieldTemplateProps,
+  FormContextType,
   getTemplate,
   getUiOptions,
+  RJSFSchema,
+  StrictRJSFSchema,
 } from "@rjsf/utils";
 import { Input, Paper, Space, Stack, Text } from "@mantine/core";
+import FormAccordion from "../FormAccordion";
 
-export type ArrayFieldTemplateProps<T, F> = RjsfArrayFieldTemplateProps<T, F>;
+export type ArrayFieldTemplateProps<
+  T = any,
+  S extends StrictRJSFSchema = RJSFSchema,
+  F extends FormContextType = any
+> = RjsfArrayFieldTemplateProps<T, S, F>;
 
-export default function ArrayFieldTemplate<T = any, F = any>({
+export default function ArrayFieldTemplate<
+  T = any,
+  S extends StrictRJSFSchema = RJSFSchema,
+  F extends FormContextType = any
+>({
   canAdd,
   disabled,
   idSchema,
@@ -19,8 +31,8 @@ export default function ArrayFieldTemplate<T = any, F = any>({
   schema,
   title,
   uiSchema,
-}: ArrayFieldTemplateProps<T, F>) {
-  const uiOptions = getUiOptions<T, F>(uiSchema);
+}: ArrayFieldTemplateProps<T, S, F>) {
+  const uiOptions = getUiOptions<T, S, F>(uiSchema);
 
   const ArrayFieldItemTemplate = getTemplate<"ArrayFieldItemTemplate", T, F>(
     "ArrayFieldItemTemplate",
@@ -33,12 +45,18 @@ export default function ArrayFieldTemplate<T = any, F = any>({
   } = registry.templates;
 
   return (
-    <Input.Wrapper
-      description={uiOptions.description || schema.description}
-      id={`${idSchema.$id}__title`}
-      label={<Text style={{ display: "inline" }}>{title}</Text>}
-      required={required}
-      styles={{ label: { color: "inherit" } }}
+    <FormAccordion
+      header={
+        <Input.Wrapper
+          description={uiOptions.description || schema.description}
+          id={`${idSchema.$id}__title`}
+          label={<Text style={{ display: "inline" }}>{title}</Text>}
+          required={required}
+          styles={{ label: { color: "inherit" } }}
+        >
+          {}
+        </Input.Wrapper>
+      }
     >
       <Paper withBorder p="sm">
         {items.length > 0 && (
@@ -58,6 +76,6 @@ export default function ArrayFieldTemplate<T = any, F = any>({
           />
         )}
       </Paper>
-    </Input.Wrapper>
+    </FormAccordion>
   );
 }

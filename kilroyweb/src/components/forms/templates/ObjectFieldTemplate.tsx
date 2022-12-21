@@ -1,12 +1,24 @@
 import { Input, Paper, Space, Stack, Text } from "@mantine/core";
 import {
   canExpand,
+  FormContextType,
   ObjectFieldTemplateProps as RjsfObjectFieldTemplateProps,
+  RJSFSchema,
+  StrictRJSFSchema,
 } from "@rjsf/utils";
+import FormAccordion from "../FormAccordion";
 
-export type ObjectFieldTemplateProps<T, F> = RjsfObjectFieldTemplateProps<T, F>;
+export type ObjectFieldTemplateProps<
+  T = any,
+  S extends StrictRJSFSchema = RJSFSchema,
+  F extends FormContextType = any
+> = RjsfObjectFieldTemplateProps<T, S, F>;
 
-export default function ObjectFieldTemplate<T = any, F = any>({
+export default function ObjectFieldTemplate<
+  T = any,
+  S extends StrictRJSFSchema = RJSFSchema,
+  F extends FormContextType = any
+>({
   description,
   disabled,
   formData,
@@ -19,38 +31,36 @@ export default function ObjectFieldTemplate<T = any, F = any>({
   schema,
   title,
   uiSchema,
-}: ObjectFieldTemplateProps<T, F>) {
-  const { properties: schemaProperties = {} } = schema;
-
-  const propertiesOrderScore = properties.reduce((acc, property) => {
-    const propertySchema = schemaProperties[property.name] || {};
-    const { propertyType } = propertySchema;
-    const score =
-      propertyType === "array" ? 0 : propertyType === "object" ? 1 : 2;
-    return { ...acc, [property.name]: score };
-  }, {});
+}: ObjectFieldTemplateProps<T, S, F>) {
+  const { nested } = uiSchema;
 
   const {
     ButtonTemplates: { AddButton },
   } = registry.templates;
 
-  const sortedProperties = properties.sort(
-    (a, b) => propertiesOrderScore[a.name] - propertiesOrderScore[b.name]
+  const sortedProperties = properties.sort((a, b) =>
+    a.name.localeCompare(b.name)
   );
 
-  if (idSchema.$id === "root") {
+  if (nested || idSchema.$id === "root") {
     return (
       <Stack spacing="xs">{sortedProperties.map((prop) => prop.content)}</Stack>
     );
   }
 
   return (
-    <Input.Wrapper
-      description={description}
-      id={`${idSchema.$id}__title`}
-      label={<Text style={{ display: "inline" }}>{title}</Text>}
-      required={required}
-      styles={{ label: { color: "inherit" } }}
+    <FormAccordion
+      header={
+        <Input.Wrapper
+          description={description}
+          id={`${idSchema.$id}__title`}
+          label={<Text style={{ display: "inline" }}>{title}</Text>}
+          required={required}
+          styles={{ label: { color: "inherit" } }}
+        >
+          {}
+        </Input.Wrapper>
+      }
     >
       <Paper withBorder p="sm">
         <Stack spacing="xs">
@@ -68,6 +78,6 @@ export default function ObjectFieldTemplate<T = any, F = any>({
           </>
         )}
       </Paper>
-    </Input.Wrapper>
+    </FormAccordion>
   );
 }

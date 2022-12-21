@@ -1,4 +1,4 @@
-import { Box, Container, createStyles } from "@mantine/core";
+import { Box, createStyles } from "@mantine/core";
 import { ReactNode } from "react";
 
 export type BackgroundProps = {

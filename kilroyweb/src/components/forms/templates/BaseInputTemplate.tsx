@@ -6,9 +6,8 @@ import {
   NumberInput,
   PasswordInput,
   Radio,
-  TextInput,
   Text,
-  Title,
+  TextInput,
 } from "@mantine/core";
 import { countDecimals, getInputProperties } from "../../../lib/utils";
 import { DatePicker, TimeInput } from "@mantine/dates";
@@ -76,6 +75,7 @@ export default function BaseInputTemplate({
   const commonInputProps = {
     ...commonImplementedProps,
     required: required,
+    error: hideError ? undefined : Boolean(rawErrors),
   };
 
   const commonTextBasedInputProps = {
@@ -99,6 +99,12 @@ export default function BaseInputTemplate({
           autoComplete={autoComplete}
           autoFocus={autofocus}
           defaultChecked={value}
+          label={
+            <Text weight={500} style={{ display: "inline" }}>
+              {label}
+            </Text>
+          }
+          labelPosition="left"
           onBlur={(event) => onBlur(id, event.target.checked)}
           onChange={(event) => onChange(event.currentTarget.checked)}
           onFocus={(event) => onFocus(id, event.target.checked)}
@@ -264,6 +270,7 @@ export default function BaseInputTemplate({
         />
       );
     case "text":
+      if (value === undefined) setTimeout(() => onChange(""));
       return (
         <TextInput
           {...commonTextBasedInputProps}
@@ -275,9 +282,11 @@ export default function BaseInputTemplate({
         <TimeInput
           {...commonInputProps}
           clearable={true}
-          defaultValue={value ? dayjs.utc(value).toDate() : undefined}
+          defaultValue={
+            value ? dayjs.utc(value, "HH:mm:ss").toDate() : undefined
+          }
           onChange={(value) =>
-            onChange(value ? dayjs.utc(value).toISOString() : undefined)
+            onChange(value ? dayjs.utc(value).format("HH:mm:ss") : undefined)
           }
           withSeconds={true}
         />

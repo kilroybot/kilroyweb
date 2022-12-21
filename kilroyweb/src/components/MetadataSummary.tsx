@@ -7,7 +7,7 @@ import { Status } from "../lib/protobuf";
 
 export type MetadataSummaryProps = {};
 
-export default function MetadataSummary(props: MetadataSummaryProps) {
+export default function MetadataSummary({}: MetadataSummaryProps) {
   const { face: faceMetadata, module: moduleMetadata } = useMetadata();
   const { face: faceStatus, module: moduleStatus } = useStatus();
   const labels = useLabels();
@@ -26,9 +26,9 @@ export default function MetadataSummary(props: MetadataSummaryProps) {
 
   return (
     <>
-      <Title order={4}>{labels.index.metadata.face}</Title>
+      <Title order={4}>{labels.pages.index.metadata.face}</Title>
       <Text size="sm">{faceMetadata.key}</Text>
-      <Title order={4}>{labels.index.metadata.module}</Title>
+      <Title order={4}>{labels.pages.index.metadata.module}</Title>
       <Text size="sm">{moduleMetadata.key}</Text>
     </>
   );

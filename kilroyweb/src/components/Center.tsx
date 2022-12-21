@@ -6,7 +6,7 @@ import {
 
 export type CenterProps = MantineCenterProps;
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles(() => ({
   center: {
     height: "100%",
     flex: 1,

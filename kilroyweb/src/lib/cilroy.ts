@@ -17,13 +17,13 @@ const transport = createGrpcWebTransport({
 
 export const client = createPromiseClient(CilroyService, transport);
 
-export type RequestOptions<I extends Message, O> = {
+export type RequestOptions<I extends Message<I>, O> = {
   method: (request: PartialMessage<I>, options?: CallOptions) => Promise<O>;
   params?: PartialMessage<I>;
   retryOptions?: Omit<RetryOptions<O>, "fn">;
 };
 
-export function request<I extends Message, O>({
+export function request<I extends Message<I>, O>({
   method,
   params,
   retryOptions,
@@ -42,7 +42,7 @@ export function request<I extends Message, O>({
   return { result: result, abort: abort };
 }
 
-export type StreamOptions<I extends Message, O> = {
+export type StreamOptions<I extends Message<I>, O> = {
   method: (
     request: PartialMessage<I>,
     options?: CallOptions
@@ -51,7 +51,7 @@ export type StreamOptions<I extends Message, O> = {
   reconnectOptions?: Omit<ReconnectOptions<O>, "fn">;
 };
 
-export function stream<I extends Message, O>({
+export function stream<I extends Message<I>, O>({
   method,
   params,
   reconnectOptions,

@@ -5,14 +5,15 @@ import { useLabels } from "../contexts/labels";
 import PageLayout from "../components/PageLayout";
 import { useConfig } from "../contexts/config";
 import Center from "../components/Center";
-import { Button, Loader, Title } from "@mantine/core";
+import { Button, Loader, Stack, Title } from "@mantine/core";
 import Segment from "../components/Segment";
 import { useConfigSchema } from "../contexts/configSchema";
 import SchemaBasedForm from "../components/SchemaBasedForm";
 import { objectDiff } from "../lib/utils";
-import { client, request } from "../lib/cilroy";
+import { client } from "../lib/cilroy";
 import { useStatus } from "../contexts/status";
 import { Status } from "../lib/protobuf";
+import useRequestCallback from "../hooks/useRequestCallback";
 
 export default function Module() {
   const labels = useLabels();
@@ -20,36 +21,38 @@ export default function Module() {
   const { module: schema } = useConfigSchema();
   const { module: moduleStatus, controller: controllerStatus } = useStatus();
 
+  const { callback: setConfig, loading: setConfigLoading } = useRequestCallback(
+    client.setModuleConfig
+  );
+  const { callback: save, loading: saveLoading } = useRequestCallback(
+    client.saveModule
+  );
+  const { callback: reset, loading: resetLoading } = useRequestCallback(
+    client.resetModule
+  );
+
   const handleSubmit = useCallback(
     async (data) => {
       const diff = objectDiff(data, config);
       if (diff !== null) {
-        const { result, abort } = request({
-          method: client.setModuleConfig,
-          params: { config: JSON.stringify(diff) },
-          retryOptions: { retriesLeft: 3 },
-        });
-        await result;
-        return () => abort.abort();
+        await setConfig({ params: { config: JSON.stringify(diff) } });
       }
     },
     [client, config]
   );
 
+  const handleSave = useCallback(async () => {
+    await save();
+  }, [client]);
+
   const handleReset = useCallback(async () => {
-    const { result, abort } = request({
-      method: client.resetModule,
-      params: {},
-      retryOptions: { retriesLeft: 3 },
-    });
-    await result;
-    return () => abort.abort();
+    await reset();
   }, [client]);
 
   return (
     <>
       <Head>
-        <title>{labels.module.title}</title>
+        <title>{labels.pages.module.title}</title>
       </Head>
       <PageLayout page="module">
         <Segment>
@@ -58,11 +61,18 @@ export default function Module() {
           moduleStatus !== Status.UNSPECIFIED &&
           controllerStatus !== Status.UNSPECIFIED ? (
             <>
-              <Title order={4}>{labels.module.config.title}</Title>
+              <Title order={4}>{labels.pages.module.config.title}</Title>
               <SchemaBasedForm
                 schema={schema}
                 data={config}
-                onSubmit={handleSubmit}
+                submit={{
+                  label: labels.pages.module.config.buttons.submit,
+                  loading:
+                    moduleStatus !== Status.READY ||
+                    controllerStatus !== Status.READY ||
+                    setConfigLoading,
+                  onSubmit: handleSubmit,
+                }}
               />
             </>
           ) : (
@@ -74,18 +84,29 @@ export default function Module() {
         <Segment>
           {moduleStatus !== Status.UNSPECIFIED &&
           controllerStatus !== Status.UNSPECIFIED ? (
-            <>
-              <Title order={4}>{labels.module.dangerZone.title}</Title>
+            <Stack>
+              <Title order={4}>{labels.pages.module.dangerZone.title}</Title>
+              <Button
+                onClick={handleSave}
+                loading={
+                  moduleStatus !== Status.READY ||
+                  controllerStatus !== Status.READY ||
+                  saveLoading
+                }
+              >
+                {labels.pages.module.dangerZone.buttons.save}
+              </Button>
               <Button
                 onClick={handleReset}
                 loading={
                   moduleStatus !== Status.READY ||
-                  controllerStatus !== Status.READY
+                  controllerStatus !== Status.READY ||
+                  resetLoading
                 }
               >
-                {labels.module.dangerZone.buttons.reset}
+                {labels.pages.module.dangerZone.buttons.reset}
               </Button>
-            </>
+            </Stack>
           ) : (
             <Center>
               <Loader />

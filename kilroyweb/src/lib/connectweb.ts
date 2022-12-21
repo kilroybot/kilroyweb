@@ -41,6 +41,12 @@ import {
   ResetFaceResponse,
   ResetModuleRequest,
   ResetModuleResponse,
+  SaveControllerRequest,
+  SaveControllerResponse,
+  SaveFaceRequest,
+  SaveFaceResponse,
+  SaveModuleRequest,
+  SaveModuleResponse,
   SetControllerConfigRequest,
   SetControllerConfigResponse,
   SetFaceConfigRequest,
@@ -77,12 +83,17 @@ import {
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
+ *
+ * Cilroy service.
+ *
  * @generated from service kilroy.cilroy.v1alpha.CilroyService
  */
 export const CilroyService = {
   typeName: "kilroy.cilroy.v1alpha.CilroyService",
   methods: {
     /**
+     * Returns the metadata of the face.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.GetFaceMetadata
      */
     getFaceMetadata: {
@@ -92,6 +103,8 @@ export const CilroyService = {
       kind: MethodKind.Unary,
     },
     /**
+     * Returns the metadata of the module.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.GetModuleMetadata
      */
     getModuleMetadata: {
@@ -101,6 +114,8 @@ export const CilroyService = {
       kind: MethodKind.Unary,
     },
     /**
+     * Returns the schema of a post as reported by the face.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.GetFacePostSchema
      */
     getFacePostSchema: {
@@ -110,6 +125,8 @@ export const CilroyService = {
       kind: MethodKind.Unary,
     },
     /**
+     * Returns the schema of a post as reported by the module.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.GetModulePostSchema
      */
     getModulePostSchema: {
@@ -119,6 +136,8 @@ export const CilroyService = {
       kind: MethodKind.Unary,
     },
     /**
+     * Returns the status of the controller.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.GetControllerStatus
      */
     getControllerStatus: {
@@ -128,6 +147,8 @@ export const CilroyService = {
       kind: MethodKind.Unary,
     },
     /**
+     * Returns an infinite stream of controller status updates.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.WatchControllerStatus
      */
     watchControllerStatus: {
@@ -137,6 +158,8 @@ export const CilroyService = {
       kind: MethodKind.ServerStreaming,
     },
     /**
+     * Returns the status of the face.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.GetFaceStatus
      */
     getFaceStatus: {
@@ -146,6 +169,8 @@ export const CilroyService = {
       kind: MethodKind.Unary,
     },
     /**
+     * Returns an infinite stream of face status updates.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.WatchFaceStatus
      */
     watchFaceStatus: {
@@ -155,6 +180,8 @@ export const CilroyService = {
       kind: MethodKind.ServerStreaming,
     },
     /**
+     * Returns the status of the module.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.GetModuleStatus
      */
     getModuleStatus: {
@@ -164,6 +191,8 @@ export const CilroyService = {
       kind: MethodKind.Unary,
     },
     /**
+     * Returns an infinite stream of module status updates.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.WatchModuleStatus
      */
     watchModuleStatus: {
@@ -173,6 +202,8 @@ export const CilroyService = {
       kind: MethodKind.ServerStreaming,
     },
     /**
+     * Returns the training status.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.GetTrainingStatus
      */
     getTrainingStatus: {
@@ -182,6 +213,8 @@ export const CilroyService = {
       kind: MethodKind.Unary,
     },
     /**
+     * Returns an infinite stream of training status updates.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.WatchTrainingStatus
      */
     watchTrainingStatus: {
@@ -191,6 +224,8 @@ export const CilroyService = {
       kind: MethodKind.ServerStreaming,
     },
     /**
+     * Returns the schema of the controller config.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.GetControllerConfigSchema
      */
     getControllerConfigSchema: {
@@ -200,6 +235,8 @@ export const CilroyService = {
       kind: MethodKind.Unary,
     },
     /**
+     * Returns the config of the controller.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.GetControllerConfig
      */
     getControllerConfig: {
@@ -209,6 +246,8 @@ export const CilroyService = {
       kind: MethodKind.Unary,
     },
     /**
+     * Returns an infinite stream of controller config updates.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.WatchControllerConfig
      */
     watchControllerConfig: {
@@ -218,6 +257,8 @@ export const CilroyService = {
       kind: MethodKind.ServerStreaming,
     },
     /**
+     * Sets the config of the controller.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.SetControllerConfig
      */
     setControllerConfig: {
@@ -227,6 +268,8 @@ export const CilroyService = {
       kind: MethodKind.Unary,
     },
     /**
+     * Returns the schema of the face config.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.GetFaceConfigSchema
      */
     getFaceConfigSchema: {
@@ -236,6 +279,8 @@ export const CilroyService = {
       kind: MethodKind.Unary,
     },
     /**
+     * Returns the config of the face.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.GetFaceConfig
      */
     getFaceConfig: {
@@ -245,6 +290,8 @@ export const CilroyService = {
       kind: MethodKind.Unary,
     },
     /**
+     * Returns an infinite stream of face config updates.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.WatchFaceConfig
      */
     watchFaceConfig: {
@@ -254,6 +301,8 @@ export const CilroyService = {
       kind: MethodKind.ServerStreaming,
     },
     /**
+     * Sets the config of the face.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.SetFaceConfig
      */
     setFaceConfig: {
@@ -263,6 +312,8 @@ export const CilroyService = {
       kind: MethodKind.Unary,
     },
     /**
+     * Returns the schema of the module config.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.GetModuleConfigSchema
      */
     getModuleConfigSchema: {
@@ -272,6 +323,8 @@ export const CilroyService = {
       kind: MethodKind.Unary,
     },
     /**
+     * Returns the config of the module.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.GetModuleConfig
      */
     getModuleConfig: {
@@ -281,6 +334,8 @@ export const CilroyService = {
       kind: MethodKind.Unary,
     },
     /**
+     * Returns an infinite stream of module config updates.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.WatchModuleConfig
      */
     watchModuleConfig: {
@@ -290,6 +345,8 @@ export const CilroyService = {
       kind: MethodKind.ServerStreaming,
     },
     /**
+     * Sets the config of the module.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.SetModuleConfig
      */
     setModuleConfig: {
@@ -299,6 +356,8 @@ export const CilroyService = {
       kind: MethodKind.Unary,
     },
     /**
+     * Starts offline training.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.TrainOffline
      */
     trainOffline: {
@@ -308,6 +367,8 @@ export const CilroyService = {
       kind: MethodKind.Unary,
     },
     /**
+     * Starts online training.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.TrainOnline
      */
     trainOnline: {
@@ -317,6 +378,8 @@ export const CilroyService = {
       kind: MethodKind.Unary,
     },
     /**
+     * Stops training.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.StopTraining
      */
     stopTraining: {
@@ -326,6 +389,8 @@ export const CilroyService = {
       kind: MethodKind.Unary,
     },
     /**
+     * Returns the configuration of the module metrics.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.GetModuleMetricsConfig
      */
     getModuleMetricsConfig: {
@@ -335,6 +400,8 @@ export const CilroyService = {
       kind: MethodKind.Unary,
     },
     /**
+     * Returns the module metrics data.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.GetModuleMetrics
      */
     getModuleMetrics: {
@@ -344,6 +411,8 @@ export const CilroyService = {
       kind: MethodKind.Unary,
     },
     /**
+     * Returns an infinite stream of module metrics data updates.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.WatchModuleMetrics
      */
     watchModuleMetrics: {
@@ -353,6 +422,8 @@ export const CilroyService = {
       kind: MethodKind.ServerStreaming,
     },
     /**
+     * Returns an infinite stream of all messages.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.WatchAll
      */
     watchAll: {
@@ -362,6 +433,8 @@ export const CilroyService = {
       kind: MethodKind.ServerStreaming,
     },
     /**
+     * Resets the controller.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.ResetController
      */
     resetController: {
@@ -371,6 +444,8 @@ export const CilroyService = {
       kind: MethodKind.Unary,
     },
     /**
+     * Resets the face.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.ResetFace
      */
     resetFace: {
@@ -380,6 +455,8 @@ export const CilroyService = {
       kind: MethodKind.Unary,
     },
     /**
+     * Resets the module.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.ResetModule
      */
     resetModule: {
@@ -389,15 +466,52 @@ export const CilroyService = {
       kind: MethodKind.Unary,
     },
     /**
+     * Saves the controller.
+     *
+     * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.SaveController
+     */
+    saveController: {
+      name: "SaveController",
+      I: SaveControllerRequest,
+      O: SaveControllerResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * Saves the face.
+     *
+     * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.SaveFace
+     */
+    saveFace: {
+      name: "SaveFace",
+      I: SaveFaceRequest,
+      O: SaveFaceResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * Saves the module.
+     *
+     * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.SaveModule
+     */
+    saveModule: {
+      name: "SaveModule",
+      I: SaveModuleRequest,
+      O: SaveModuleResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * Returns the feed.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.GetFeed
      */
     getFeed: {
       name: "GetFeed",
       I: GetFeedRequest,
       O: GetFeedResponse,
-      kind: MethodKind.Unary,
+      kind: MethodKind.ServerStreaming,
     },
     /**
+     * Returns an infinite stream of feed updates.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.WatchFeed
      */
     watchFeed: {
@@ -407,6 +521,8 @@ export const CilroyService = {
       kind: MethodKind.ServerStreaming,
     },
     /**
+     * Generates posts without any side effects.
+     *
      * @generated from rpc kilroy.cilroy.v1alpha.CilroyService.GeneratePosts
      */
     generatePosts: {

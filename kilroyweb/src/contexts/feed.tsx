@@ -5,12 +5,19 @@ import {
   useEffect,
   useState,
 } from "react";
-import { client, request } from "../lib/cilroy";
-import { Post, WatchFeedResponse } from "../lib/protobuf";
+import { client, stream } from "../lib/cilroy";
+import { WatchFeedResponse } from "../lib/protobuf";
 import { useStreams } from "./streams";
 
+export type FeedPostData = {
+  id: string;
+  url?: string;
+  content: string;
+  createdAt: string;
+};
+
 export type FeedContextType = {
-  posts?: Post[];
+  posts?: FeedPostData[];
 };
 
 const FeedContext = createContext<FeedContextType>({});
@@ -20,15 +27,33 @@ export type FeedProviderProps = {
 };
 
 export function FeedProvider({ children }: FeedProviderProps) {
-  const [posts, setPosts] = useState<Post[]>();
+  const [posts, setPosts] = useState<FeedPostData[]>();
 
   const { messages, getConnectQueue } = useStreams();
-  const { WatchFeed: stream } = messages;
+  const { WatchFeed: feedStream } = messages;
 
   useEffect(() => {
     const method = client.getFeed;
-    const { result, abort } = request({ method });
-    result.then((response) => setPosts(response.posts));
+    const { result, abort } = stream({
+      method,
+      reconnectOptions: { infinite: false },
+    });
+
+    const fetch = async () => {
+      for await (const response of result) {
+        const post = {
+          id: response.id,
+          url: response.url,
+          content: response.content,
+          createdAt: response.createdAt,
+        };
+        setPosts((prev) => {
+          if (prev === undefined) return [post];
+          return [...prev, post];
+        });
+      }
+    };
+    fetch().then();
     return () => abort.abort();
   }, [client]);
 
@@ -37,15 +62,27 @@ export function FeedProvider({ children }: FeedProviderProps) {
 
     const fetch = async () => {
       for await (const _ of getConnectQueue()) {
-        const { result, abort } = request({
+        const { result, abort } = stream({
           method: client.getFeed,
-          retryOptions: {
+          reconnectOptions: {
             retriesLeft: 3,
+            infinite: false,
           },
         });
         abortCallback = () => abort.abort();
-        const response = await result;
-        setPosts(response.posts);
+
+        for await (const response of result) {
+          const post = {
+            id: response.id,
+            url: response.url,
+            content: response.content,
+            createdAt: response.createdAt,
+          };
+          setPosts((prev) => {
+            if (prev === undefined) return [post];
+            return [...prev, post];
+          });
+        }
       }
     };
     fetch().then();
@@ -54,22 +91,25 @@ export function FeedProvider({ children }: FeedProviderProps) {
   }, [client, getConnectQueue]);
 
   useEffect(() => {
-    if (stream === undefined) return;
+    if (feedStream === undefined) return;
 
     const fetch = async () => {
-      for await (const message of stream) {
+      for await (const message of feedStream) {
         const response = WatchFeedResponse.fromJsonString(message);
+        const post = {
+          id: response.id,
+          url: response.url,
+          content: response.content,
+          createdAt: response.createdAt,
+        };
         setPosts((prev) => {
-          if (prev === undefined) return [response.post];
-          console.log(prev);
-          const neww = [...prev, response.post];
-          console.log(neww);
-          return neww;
+          if (prev === undefined) return [post];
+          return [...prev, post];
         });
       }
     };
     fetch().then();
-  }, [stream === undefined]);
+  }, [feedStream === undefined]);
 
   const feed = { posts };
 
