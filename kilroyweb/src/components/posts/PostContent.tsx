@@ -4,13 +4,23 @@ import { usePostSchema } from "../../contexts/postSchema";
 import { Loader } from "@mantine/core";
 import Center from "../Center";
 import TextOrImagePostContent from "./TextOrImagePostContent";
+import TextOnlyPostContent from "./TextOnlyPostContent";
+import ImageOnlyPostContent from "./ImageOnlyPostContent";
+import TextAndImagePostContent from "./TextAndImagePostContent";
+import TextWithOptionalImagePostContent from "./TextWithOptionalImagePostContent";
+import ImageWithOptionalTextPostContent from "./ImageWithOptionalTextPostContent";
 
 export type PostContentProps = {
   content: Object;
 };
 
 const knownSchemaComponents = {
+  TextOnlyPost: TextOnlyPostContent,
+  ImageOnlyPost: ImageOnlyPostContent,
+  TextAndImagePost: TextAndImagePostContent,
   TextOrImagePost: TextOrImagePostContent,
+  TextWithOptionalImagePost: TextWithOptionalImagePostContent,
+  ImageWithOptionalTextPost: ImageWithOptionalTextPostContent,
 };
 
 export default function PostContent({ content }: PostContentProps) {
